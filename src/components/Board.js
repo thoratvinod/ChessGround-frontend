@@ -5,7 +5,6 @@ import Settings from '../core/Settings';
 import { handleDragStart, handleDropEvent } from '../core/DragNDrop';
 
 import Session from '../core/session';
-import '../scss/board.scss';
 // import '../static/images/pawn'
 
 const images = {
