@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const User = async () => {
+const Footer = async () => {
 	const res = await axios.get('https://randomuser.me/api');
 	const user = res.data.results[0];
 
@@ -21,4 +21,4 @@ const User = async () => {
 	return template;
 };
 
-export default User;
+export default Footer;

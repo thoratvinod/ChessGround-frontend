@@ -1,38 +1,37 @@
 import { ChessPiece, Color } from './Enums';
 import { charCodeA, charCodeH, charCode0, positionToArrayIndex } from './Utility';
 
+const chessBoard = {
 
-export class Board {
-
-    static board = new Array(65).fill({ piece: ChessPiece.EMPTY, color: Color.EMPTY});
-
-    static validMoves = new Array();
-
-    static removedPieces = new Array();
-
-    static getPiece(position) {
-        return board[positionToArrayIndex(position)];
-    }
-
-    static setPiece(position, piece) {
+    // current position of pieces
+    board: new Array(65).fill({ piece: ChessPiece.EMPTY, color: Color.EMPTY}),
+    // valid moves for current situation
+    validMoves: new Array(),
+    // pieces captured
+    removedPieces: new Array(),
+    // get pieces by position for eg. 'a4'
+    getPiece: function (position) {
+        return this.board[positionToArrayIndex(position)];
+    },
+    // set piece by position
+    setPiece: function (position, piece) {
         this.board[positionToArrayIndex(position)] = piece;
-    }
-
-    static setByIndex(index, piece) {
+    },
+    // set board array using direct index
+    setByIndex: function (index, piece) {
         this.board[index] = piece;
-    }
-
-    static positionToArrayIndex (position) {
+    },
+    // evaluate array index of board from position string
+    positionToArrayIndex: function (position) {
 
         const letter = position.charCodeAt(0);
         const num    = position.charCodeAt(1) - charCode0;
     
         let letterNum = letter - charCodeA + 1;
         return letterNum + (num-1) * 8;
-    }
-
-        
-    static highlightPossibleMoves(currentPosition, piece, color) {
+    },
+    // highlight valid moves on board UI
+    highlightPossibleMoves: function(currentPosition, piece, color) {
         
         const divBlock = `<div class="validMoves"></div>`;
         // let possibleMoves = getPossibleMoves(currentPosition, piece, color);
@@ -44,27 +43,26 @@ export class Board {
                 $(`#${move}`).append(divBlock);
             }
         });
-    }
-
-    static eraseValidMoves() {
+    },
+    eraseValidMoves: function () {
         this.validMoves.forEach(move => {
             if (this.board[positionToArrayIndex(move)].piece === ChessPiece.EMPTY) {
                 $(`#${move}`).empty();
             }
         });
         this.validMoves = [];
-    }
+    },
+    // evaluates valid moves
+    getValidMoves: function (currentPosition, piece, color) {
 
-    static getValidMoves(currentPosition, piece, color) {
-
-        function addEntry(i, j) {
+        const addEntry = (i, j) => {
             const pos = `${String.fromCharCode(i)}${j}`;
             const index = positionToArrayIndex(pos);
     
-            if (Board.board[index].piece === ChessPiece.EMPTY || Board.board[index].color === color) {
+            if (this.board[index].piece === ChessPiece.EMPTY || this.board[index].color === color) {
     
-                Board.validMoves.push(pos);
-                return Board.board[index].color === color ? false :true;
+                this.validMoves.push(pos);
+                return this.board[index].color === color ? false :true;
             }
             return false;
         }
@@ -292,4 +290,7 @@ export class Board {
         }
     
     }
+
 }
+
+export default chessBoard;

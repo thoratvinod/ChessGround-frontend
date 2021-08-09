@@ -1,14 +1,18 @@
-import { setupChessBoard } from './components/Board';
+import Header from './injectors/Header';
+import Footer from './injectors/Footer';
+import { setupChessBoard } from './injectors/Board'
 
-async function App() {
+async function App(id) {
   
-  setupChessBoard();
-  const template = document.createElement('template')
-  template.innerHTML = `
-    <div id="chess-board"></div>
-  `
-  // Return a new node from template
-  return template.content.cloneNode(true)
+  Header(id);
+  
+  const boardId = 'chess-board'
+  const template = `<div id="${boardId}"></div>`
+  $(`#${id}`).append(template);
+
+  setupChessBoard(boardId);
+
+  Footer(id);
 }
 
 export default App;

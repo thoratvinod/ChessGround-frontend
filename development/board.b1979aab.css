@@ -93,5 +93,13 @@ body {
     outline: 3px solid #5d3b3b;
     outline-offset: -1px;
 } */
+i {
+  color: #daa94f;
+  cursor: pointer;
+}
+
+.hoverEffect {
+  filter: hue-rotate(45deg);
+}
 
 /*# sourceMappingURL=/board.b1979aab.css.map */

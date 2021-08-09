@@ -1,6 +1,6 @@
 import { charCode0, charCodeA, charCodeH, positionToArrayIndex } from '../core/Utility';
 import { ChessPiece, Color, ChessBoardType } from '../core/Enums';
-import Settings from '../core/Settings';
+import settings from '../core/settings';
 
 import { handleDragStart, handleDropEvent } from '../core/DragNDrop';
 
@@ -36,11 +36,12 @@ const images = {
 
 const baseImageURL = '../src/static/images/';
 
-export function setupChessBoard()
+export function setupChessBoard(id)
 {
 
 
-    const boardUI = document.querySelector('#chess-board');
+    $('board').droppable = false;   
+    const boardUI = document.querySelector(`#${id}`);
 
     for (let i = 8; i >= 1; i--) {
         let black = i % 2 === 1;
@@ -97,59 +98,67 @@ export function setupChessBoard()
     addImgNodeInGrid('rook', 'white', 'h1');
 
     //   Rooks
-    Board.setByIndex(1, { piece: ChessPiece.ROOK, color: Color.WHITE });
-    Board.setByIndex(8, { piece: ChessPiece.ROOK, color: Color.WHITE });
-    Board.setByIndex(57, { piece: ChessPiece.ROOK, color: Color.BLACK });
-    Board.setByIndex(64, { piece: ChessPiece.ROOK, color: Color.BLACK });
+    chessBoard.setByIndex(1, { piece: ChessPiece.ROOK, color: Color.WHITE });
+    chessBoard.setByIndex(8, { piece: ChessPiece.ROOK, color: Color.WHITE });
+    chessBoard.setByIndex(57, { piece: ChessPiece.ROOK, color: Color.BLACK });
+    chessBoard.setByIndex(64, { piece: ChessPiece.ROOK, color: Color.BLACK });
 
     //   Knights
-    Board.setByIndex(2, { piece: ChessPiece.KNIGHT, color: Color.WHITE });
-    Board.setByIndex(7, { piece: ChessPiece.KNIGHT, color: Color.WHITE });
-    Board.setByIndex(58, { piece: ChessPiece.KNIGHT, color: Color.BLACK });
-    Board.setByIndex(63, { piece: ChessPiece.KNIGHT, color: Color.BLACK });
+    chessBoard.setByIndex(2, { piece: ChessPiece.KNIGHT, color: Color.WHITE });
+    chessBoard.setByIndex(7, { piece: ChessPiece.KNIGHT, color: Color.WHITE });
+    chessBoard.setByIndex(58, { piece: ChessPiece.KNIGHT, color: Color.BLACK });
+    chessBoard.setByIndex(63, { piece: ChessPiece.KNIGHT, color: Color.BLACK });
 
     //   Bishops
-    Board.setByIndex(3, { piece: ChessPiece.BISHOP, color: Color.WHITE });
-    Board.setByIndex(6, { piece: ChessPiece.BISHOP, color: Color.WHITE });
-    Board.setByIndex(59, { piece: ChessPiece.BISHOP, color: Color.BLACK });
-    Board.setByIndex(62, { piece: ChessPiece.BISHOP, color: Color.BLACK });
+    chessBoard.setByIndex(3, { piece: ChessPiece.BISHOP, color: Color.WHITE });
+    chessBoard.setByIndex(6, { piece: ChessPiece.BISHOP, color: Color.WHITE });
+    chessBoard.setByIndex(59, { piece: ChessPiece.BISHOP, color: Color.BLACK });
+    chessBoard.setByIndex(62, { piece: ChessPiece.BISHOP, color: Color.BLACK });
 
     //   Queens
-    Board.setByIndex(4, { piece: ChessPiece.QUEEN, color: Color.WHITE });
-    Board.setByIndex(60, { piece: ChessPiece.QUEEN, color: Color.BLACK });
+    chessBoard.setByIndex(4, { piece: ChessPiece.QUEEN, color: Color.WHITE });
+    chessBoard.setByIndex(60, { piece: ChessPiece.QUEEN, color: Color.BLACK });
 
     //   Kings
-    Board.setByIndex(5, { piece: ChessPiece.KING, color: Color.WHITE });
-    Board.setByIndex(61, { piece: ChessPiece.KING, color: Color.BLACK });
+    chessBoard.setByIndex(5, { piece: ChessPiece.KING, color: Color.WHITE });
+    chessBoard.setByIndex(61, { piece: ChessPiece.KING, color: Color.BLACK });
 
     //   Pawns
     for (let i = 0; i < 8; i++) {
-        Board.setByIndex(9+i, { piece: ChessPiece.PAWN, color: Color.WHITE });
-        Board.setByIndex(49+i, { piece: ChessPiece.PAWN, color: Color.BLACK });
+        chessBoard.setByIndex(9+i, { piece: ChessPiece.PAWN, color: Color.WHITE });
+        chessBoard.setByIndex(49+i, { piece: ChessPiece.PAWN, color: Color.BLACK });
 
+    }
+
+    const dragConfig = {
+        start: handleDragStart,
+        containment: "#chess-board", 
+        scroll: false,
+        cursor: 'move',
+        revert: "invalid",
+        revertDuration: 200
+    };
+
+    const dropConfig = {
+        drop: handleDropEvent,          
+        accept: '.svg-piece',
+        hoverClass: 'hoverEffect',
     }
 
     // setting up the pieces
     
-    if (Settings.chessBoardType === ChessBoardType.PlayGround) {
+    if (settings.chessBoardType === ChessBoardType.PlayGround) {
 
         // make pieces draggable
-        $(`.svg-piece`).draggable({
-            start: handleDragStart,
-            cursor: 'move',
-            revert: "invalid",
-            revertDuration: 200
-        });
+        $(`.svg-piece`).draggable(dragConfig);
 
-        $(".chess-cell").droppable({
-            drop: handleDropEvent,          
-        });
+        $(".chess-cell").droppable(dropConfig);
 
         $(".svg-piece").click((event) => {
             console.log(event);
             let { position, piece} = event.target.dataset
-            let gridPiece = Board.board[positionToArrayIndex(position)];
-            Board.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+            let gridPiece = chessBoard.board[positionToArrayIndex(position)];
+            chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
         });
 
         
@@ -157,7 +166,7 @@ export function setupChessBoard()
         // $(".chess-cell").click((event) => {
         //     let id = event.target.id;   
 
-        //     // if (Board.validMoves.includes(id)) {
+        //     // if (chessBoard.validMoves.includes(id)) {
         //     //     console.log("Change position");
         //     //     pieceSelected = false
         //     // }
@@ -167,31 +176,24 @@ export function setupChessBoard()
         //     // }
         // })
     }
-    else if (Settings.chessBoardType === ChessBoardType.Match) {
+    else if (settings.chessBoardType === ChessBoardType.Match) {
         
         // make pieces draggable
-        $(`.${Session.myColor === Color.WHITE ? 'white' : 'black'}-piece`).draggable({
-            start: handleDragStart,
-            cursor: 'move',
-            revert: "invalid",
-            revertDuration: 200
-        });
+        $(`.${Session.myColor === Color.WHITE ? 'white' : 'black'}-piece`).draggable(dragConfig);
 
         $(`.${Session.opponentColor === Color.WHITE ? 'white' : 'black'}-piece`).attr("draggable", false);
         $(`.${Session.opponentColor === Color.WHITE ? 'white' : 'black'}-piece`).css('cursor', 'auto');
 
-        $(".chess-cell").droppable({
-            drop: handleDropEvent,          
-        });
+        $(".chess-cell").droppable(dropConfig);
 
         $(".svg-piece").click((event) => {
             console.log(event);
             let { position, piece } = event.target.dataset;
-            let gridPiece = Board.board[positionToArrayIndex(position)];
-            Board.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+            let gridPiece = chessBoard.board[positionToArrayIndex(position)];
+            chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
         })
     }
-    else if (Settings.chessBoardType === ChessBoardType.Disabled) {
+    else if (settings.chessBoardType === ChessBoardType.Disabled) {
 
         $(`.svg-piece`).attr("draggable", false);
         $(`.svg-piece`).css('cursor', 'auto');

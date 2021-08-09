@@ -1,3 +1,6 @@
+$white-sqaure-color: wheat;
+$black-sqaure-color: #937171;
+
 #chess-board {
     width: 88vh;
     height: 88vh;
@@ -23,10 +26,10 @@
       background-color: cadetblue;
   }
   .black {
-      background-color: #937171;
+      background-color: $black-sqaure-color;
   }
   .white {
-      background-color: wheat;
+      background-color: $white-sqaure-color;
   }
   .svg-piece {
       height: 11vh;
@@ -88,3 +91,12 @@
       outline: 3px solid #5d3b3b;
       outline-offset: -1px;
   } */
+
+  i {
+      color: rgb(218, 169, 79);
+      cursor: pointer;
+  }
+
+  .hoverEffect {
+    filter: hue-rotate(45deg);
+  }

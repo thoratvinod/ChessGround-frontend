@@ -1,17 +1,20 @@
 import App from './App';
-import { Board } from './core/Board';
+import chessBoard  from './core/chessBoard';
+import { setupChessBoard } from './injectors/Board';
 
-var jquery = require("jquery");
-window.$ = window.jQuery = jquery; // notice the definition of global variables here
+// chessBoard object representation
+window.chessBoard = chessBoard
+// get jquery object here
+const jquery = require("jquery");
+// assign it to global scope
+window.$ = window.jQuery = jquery;
+// require jquery ui dist
 require("jquery-ui-dist/jquery-ui.js");
-
-window.Board = Board
 
 const app = async () => {
 
-  // $('#app').append()
-
-  document.getElementById('app').appendChild(await App());
+  App("app");
 };
+
 // Load app
 app();

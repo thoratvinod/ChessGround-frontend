@@ -5,10 +5,10 @@ import { moveSound } from './Sounds';
 export const handleDragStart = (event) => {
 
     let { position, piece } = event.target.dataset;
-    event.target.style.zIndex = '9999'
-    Board.eraseValidMoves();
-    let gridPiece = Board.board[positionToArrayIndex(position)]
-    Board.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+    event.target.style.zIndex = '9999';
+    chessBoard.eraseValidMoves();
+    let gridPiece = chessBoard.board[positionToArrayIndex(position)]
+    chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
 }
 
 export const handleDropEvent = (event, ui) => {
@@ -26,19 +26,19 @@ export const handleDropEvent = (event, ui) => {
         return;
     }
 
-    if (!Board.validMoves.includes(destPosition)) {
+    if (!chessBoard.validMoves.includes(destPosition)) {
         ui.draggable.draggable('option', 'revert', "valid");
         pieceUI.style.zIndex = '0';
         return;
     }
     else {
         pieceUI.style.zIndex = '0';
-        Board.eraseValidMoves();
+        chessBoard.eraseValidMoves();
         console.log(ui.draggable[0]);
-        let gridPiece = Board.board[positionToArrayIndex(startPosition)];
-        let destPosPiece = Board.board[positionToArrayIndex(destPosition)];
+        let gridPiece = chessBoard.board[positionToArrayIndex(startPosition)];
+        let destPosPiece = chessBoard.board[positionToArrayIndex(destPosition)];
         if (destPosPiece.piece !== ChessPiece.EMPTY) {
-            Board.removedPieces.push(destPosPiece);
+            chessBoard.removedPieces.push(destPosPiece);
             $(`#${destPosition}`).empty();
         }
         pieceUI.dataset.position = destPosition;
@@ -51,9 +51,9 @@ export const handleDropEvent = (event, ui) => {
 
             //
         }
-        // update position in ChessBoard Array
-        Board.board[positionToArrayIndex(startPosition)] = { piece: ChessPiece.EMPTY, color: Color.EMPTY };
-        Board.board[positionToArrayIndex(destPosition)] = { piece: piece, color: color};
+        // update position in ChesschessBoard Array
+        chessBoard.board[positionToArrayIndex(startPosition)] = { piece: ChessPiece.EMPTY, color: Color.EMPTY };
+        chessBoard.board[positionToArrayIndex(destPosition)] = { piece: piece, color: color};
 
         // play sound
         moveSound.play();

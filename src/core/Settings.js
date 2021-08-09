@@ -1,11 +1,11 @@
 import { ChessBoardType } from './Enums';
 
-class Settings {
+const settings = {
 
-    static chessBoardType = ChessBoardType.PlayGround;
+    chessBoardType: ChessBoardType.PlayGround,
 
-    static colorCombination = { black: '#937171', white: 'wheat'};
+    colorCombination: { black: '#937171', white: 'wheat'},
 
 }
 
-export default Settings;
+export default settings;

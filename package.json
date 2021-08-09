@@ -26,9 +26,9 @@
     "sass": "^1.37.5"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "axios": "^0.21.1",
     "jquery": "^3.6.0",
-    "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
     "query": "^0.2.0"
   }

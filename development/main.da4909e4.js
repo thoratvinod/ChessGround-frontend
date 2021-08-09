@@ -2293,102 +2293,7 @@ try {
 
 },{}],"../node_modules/@babel/runtime-corejs2/regenerator/index.js":[function(require,module,exports) {
 module.exports = require("regenerator-runtime");
-},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../src/core/Utility.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.positionToArrayIndex = exports.charCode0 = exports.charCodeH = exports.charCodeA = void 0;
-var charCodeA = "a".charCodeAt(0);
-exports.charCodeA = charCodeA;
-var charCodeH = "h".charCodeAt(0);
-exports.charCodeH = charCodeH;
-var charCode0 = "0".charCodeAt(0);
-exports.charCode0 = charCode0;
-
-var positionToArrayIndex = function positionToArrayIndex(position) {
-  var letter = position.charCodeAt(0);
-  var num = position.charCodeAt(1) - charCode0;
-  var letterNum = letter - charCodeA + 1;
-  return letterNum + (num - 1) * 8;
-};
-
-exports.positionToArrayIndex = positionToArrayIndex;
-},{}],"../src/core/Enums.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ChessBoardType = exports.Color = exports.ChessPiece = void 0;
-// Enum for pieces
-var ChessPiece = {
-  EMPTY: 0,
-  KING: 1,
-  QUEEN: 2,
-  ROOK: 3,
-  BISHOP: 4,
-  KNIGHT: 5,
-  PAWN: 6
-};
-exports.ChessPiece = ChessPiece;
-var Color = {
-  EMPTY: 0,
-  BLACK: 1,
-  WHITE: 2
-};
-exports.Color = Color;
-var ChessBoardType = {
-  PlayGround: 0,
-  Match: 1,
-  Disabled: 2
-};
-exports.ChessBoardType = ChessBoardType;
-},{}],"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js":[function(require,module,exports) {
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-module.exports = _classCallCheck;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{}],"../node_modules/core-js/library/modules/es6.object.define-property.js":[function(require,module,exports) {
-var $export = require('./_export');
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !require('./_descriptors'), 'Object', { defineProperty: require('./_object-dp').f });
-
-},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js","./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js"}],"../node_modules/core-js/library/fn/object/define-property.js":[function(require,module,exports) {
-require('../../modules/es6.object.define-property');
-var $Object = require('../../modules/_core').Object;
-module.exports = function defineProperty(it, key, desc) {
-  return $Object.defineProperty(it, key, desc);
-};
-
-},{"../../modules/es6.object.define-property":"../node_modules/core-js/library/modules/es6.object.define-property.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":[function(require,module,exports) {
-module.exports = require("core-js/library/fn/object/define-property");
-},{"core-js/library/fn/object/define-property":"../node_modules/core-js/library/fn/object/define-property.js"}],"../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js":[function(require,module,exports) {
-var _Object$defineProperty = require("@babel/runtime-corejs2/core-js/object/define-property");
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    _Object$defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{"@babel/runtime-corejs2/core-js/object/define-property":"../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js"}],"../src/core/Settings.js":[function(require,module,exports) {
+},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../src/injectors/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2396,817 +2301,1063 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/defineProperty"));
-
-var _Enums = require("./Enums");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Settings = function Settings() {
-  (0, _classCallCheck2.default)(this, Settings);
-};
-
-(0, _defineProperty2.default)(Settings, "chessBoardType", _Enums.ChessBoardType.PlayGround);
-(0, _defineProperty2.default)(Settings, "colorCombination", {
-  black: '#937171',
-  white: 'wheat'
-});
-var _default = Settings;
-exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/defineProperty":"../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js","./Enums":"../src/core/Enums.js"}],"../node_modules/core-js/library/modules/_string-ws.js":[function(require,module,exports) {
-module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
-  '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
-
-},{}],"../node_modules/core-js/library/modules/_string-trim.js":[function(require,module,exports) {
-var $export = require('./_export');
-var defined = require('./_defined');
-var fails = require('./_fails');
-var spaces = require('./_string-ws');
-var space = '[' + spaces + ']';
-var non = '\u200b\u0085';
-var ltrim = RegExp('^' + space + space + '*');
-var rtrim = RegExp(space + space + '*$');
-
-var exporter = function (KEY, exec, ALIAS) {
-  var exp = {};
-  var FORCE = fails(function () {
-    return !!spaces[KEY]() || non[KEY]() != non;
+var headerController = function headerController() {
+  $('#btnSetting').click(function (event) {
+    console.log("Clicked...");
+    $('#settingModal').dialog();
   });
-  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];
-  if (ALIAS) exp[ALIAS] = fn;
-  $export($export.P + $export.F * FORCE, 'String', exp);
 };
 
-// 1 -> String#trimLeft
-// 2 -> String#trimRight
-// 3 -> String#trim
-var trim = exporter.trim = function (string, TYPE) {
-  string = String(defined(string));
-  if (TYPE & 1) string = string.replace(ltrim, '');
-  if (TYPE & 2) string = string.replace(rtrim, '');
-  return string;
+var Header = function Header(id) {
+  var template = "\n      <Header>\n        <i class='fa fa-cog' id=\"btnSetting\"></i>\n        <div id=\"settingModal\" title=\"Basic dialog\" hidden>\n          <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>\n        </div>\n      </Header>\n    ";
+  $("#".concat(id)).append(template);
+  headerController();
 };
 
-module.exports = exporter;
+var _default = Header;
+exports.default = _default;
+},{}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+'use strict';
 
-},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_defined":"../node_modules/core-js/library/modules/_defined.js","./_fails":"../node_modules/core-js/library/modules/_fails.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/_parse-int.js":[function(require,module,exports) {
-var $parseInt = require('./_global').parseInt;
-var $trim = require('./_string-trim').trim;
-var ws = require('./_string-ws');
-var hex = /^[-+]?0[xX]/;
-
-module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? function parseInt(str, radix) {
-  var string = $trim(String(str), 3);
-  return $parseInt(string, (radix >>> 0) || (hex.test(string) ? 16 : 10));
-} : $parseInt;
-
-},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_string-trim":"../node_modules/core-js/library/modules/_string-trim.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/es6.parse-int.js":[function(require,module,exports) {
-var $export = require('./_export');
-var $parseInt = require('./_parse-int');
-// 18.2.5 parseInt(string, radix)
-$export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt });
-
-},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_parse-int":"../node_modules/core-js/library/modules/_parse-int.js"}],"../node_modules/core-js/library/fn/parse-int.js":[function(require,module,exports) {
-require('../modules/es6.parse-int');
-module.exports = require('../modules/_core').parseInt;
-
-},{"../modules/es6.parse-int":"../node_modules/core-js/library/modules/es6.parse-int.js","../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js":[function(require,module,exports) {
-module.exports = require("core-js/library/fn/parse-int");
-},{"core-js/library/fn/parse-int":"../node_modules/core-js/library/fn/parse-int.js"}],"../src/static/sound/Move_Sound_Effect.wav":[function(require,module,exports) {
-module.exports = "/Move_Sound_Effect.f1e2673e.wav";
-},{}],"../src/core/Sounds.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.moveSound = void 0;
-// move sounds
-var moveSound = new Audio(require('../static/sound/Move_Sound_Effect.wav'));
-exports.moveSound = moveSound;
-},{"../static/sound/Move_Sound_Effect.wav":"../src/static/sound/Move_Sound_Effect.wav"}],"../src/core/DragNDrop.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.handleDropEvent = exports.handleDragStart = void 0;
-
-var _parseInt2 = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/parse-int"));
-
-var _Utility = require("./Utility");
-
-var _Enums = require("./Enums");
-
-var _Sounds = require("./Sounds");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var handleDragStart = function handleDragStart(event) {
-  var _event$target$dataset = event.target.dataset,
-      position = _event$target$dataset.position,
-      piece = _event$target$dataset.piece;
-  event.target.style.zIndex = '9999';
-  Board.eraseValidMoves();
-  var gridPiece = Board.board[(0, _Utility.positionToArrayIndex)(position)];
-  Board.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
 };
 
-exports.handleDragStart = handleDragStart;
+},{}],"../node_modules/axios/lib/utils.js":[function(require,module,exports) {
+'use strict';
 
-var handleDropEvent = function handleDropEvent(event, ui) {
-  var pieceUI = ui.draggable[0];
-  var startPosition = pieceUI.dataset.position;
-  var destPosition = event.target.id;
-  console.log("start postion: ".concat(startPosition, ", destination postion: ").concat(destPosition));
+var bind = require('./helpers/bind');
 
-  if (startPosition === destPosition) {
-    ui.draggable.draggable('option', 'revert', "valid");
-    pieceUI.style.zIndex = '0';
+/*global toString:true*/
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
     return;
   }
 
-  if (!Board.validMoves.includes(destPosition)) {
-    ui.draggable.draggable('option', 'revert', "valid");
-    pieceUI.style.zIndex = '0';
-    return;
-  } else {
-    pieceUI.style.zIndex = '0';
-    Board.eraseValidMoves();
-    console.log(ui.draggable[0]);
-    var gridPiece = Board.board[(0, _Utility.positionToArrayIndex)(startPosition)];
-    var destPosPiece = Board.board[(0, _Utility.positionToArrayIndex)(destPosition)];
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
 
-    if (destPosPiece.piece !== _Enums.ChessPiece.EMPTY) {
-      Board.removedPieces.push(destPosPiece);
-      $("#".concat(destPosition)).empty();
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
+      result[key] = merge(result[key], val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isPlainObject: isPlainObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim,
+  stripBOM: stripBOM
+};
+
+},{"./helpers/bind":"../node_modules/axios/lib/helpers/bind.js"}],"../node_modules/axios/lib/helpers/buildURL.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('./../utils');
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
     }
 
-    pieceUI.dataset.position = destPosition;
-    pieceUI.style.top = '0px';
-    pieceUI.style.left = '0px';
-    event.target.append(pieceUI);
-    var piece = (0, _parseInt2.default)(gridPiece.piece);
-    var color = (0, _parseInt2.default)(gridPiece.color);
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
 
-    if (piece === _Enums.ChessPiece.KING || piece === _Enums.ChessPiece.ROOK) {//
-    } // update position in ChessBoard Array
+  return url;
+};
 
+},{"./../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/core/InterceptorManager.js":[function(require,module,exports) {
+'use strict';
 
-    Board.board[(0, _Utility.positionToArrayIndex)(startPosition)] = {
-      piece: _Enums.ChessPiece.EMPTY,
-      color: _Enums.Color.EMPTY
+var utils = require('./../utils');
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+},{"./../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/core/transformData.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('./../utils');
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+},{"./../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/cancel/isCancel.js":[function(require,module,exports) {
+'use strict';
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+},{}],"../node_modules/axios/lib/helpers/normalizeHeaderName.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('../utils');
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+},{"../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/core/enhanceError.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code
     };
-    Board.board[(0, _Utility.positionToArrayIndex)(destPosition)] = {
-      piece: piece,
-      color: color
-    }; // play sound
+  };
+  return error;
+};
 
-    _Sounds.moveSound.play();
+},{}],"../node_modules/axios/lib/core/createError.js":[function(require,module,exports) {
+'use strict';
 
-    ui.draggable.draggable('option', 'revert', "invalid");
+var enhanceError = require('./enhanceError');
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+},{"./enhanceError":"../node_modules/axios/lib/core/enhanceError.js"}],"../node_modules/axios/lib/core/settle.js":[function(require,module,exports) {
+'use strict';
+
+var createError = require('./createError');
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
   }
 };
 
-exports.handleDropEvent = handleDropEvent;
-},{"@babel/runtime-corejs2/core-js/parse-int":"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js","./Utility":"../src/core/Utility.js","./Enums":"../src/core/Enums.js","./Sounds":"../src/core/Sounds.js"}],"../src/core/session.js":[function(require,module,exports) {
-"use strict";
+},{"./createError":"../node_modules/axios/lib/core/createError.js"}],"../node_modules/axios/lib/helpers/cookies.js":[function(require,module,exports) {
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+var utils = require('./../utils');
 
-var _Enums = require("./Enums");
+module.exports = (
+  utils.isStandardBrowserEnv() ?
 
-var Session = {
-  myColor: _Enums.Color.WHITE,
-  opponentColor: _Enums.Color.BLACK
-};
-var _default = Session;
-exports.default = _default;
-},{"./Enums":"../src/core/Enums.js"}],"../src/static/images/pawn_black.svg":[function(require,module,exports) {
-module.exports = "/pawn_black.dc2ccb3c.svg";
-},{}],"../src/static/images/pawn_white.svg":[function(require,module,exports) {
-module.exports = "/pawn_white.4a259157.svg";
-},{}],"../src/static/images/king_black.svg":[function(require,module,exports) {
-module.exports = "/king_black.8c980b8d.svg";
-},{}],"../src/static/images/king_white.svg":[function(require,module,exports) {
-module.exports = "/king_white.b95757a4.svg";
-},{}],"../src/static/images/queen_black.svg":[function(require,module,exports) {
-module.exports = "/queen_black.c6d3ff88.svg";
-},{}],"../src/static/images/queen_white.svg":[function(require,module,exports) {
-module.exports = "/queen_white.fd9a7ff5.svg";
-},{}],"../src/static/images/rook_black.svg":[function(require,module,exports) {
-module.exports = "/rook_black.4c664f80.svg";
-},{}],"../src/static/images/rook_white.svg":[function(require,module,exports) {
-module.exports = "/rook_white.d389c1f7.svg";
-},{}],"../src/static/images/knight_black.svg":[function(require,module,exports) {
-module.exports = "/knight_black.61eac6ee.svg";
-},{}],"../src/static/images/knight_white.svg":[function(require,module,exports) {
-module.exports = "/knight_white.fc99a87d.svg";
-},{}],"../src/static/images/bishop_black.svg":[function(require,module,exports) {
-module.exports = "/bishop_black.3c937dba.svg";
-},{}],"../src/static/images/bishop_white.svg":[function(require,module,exports) {
-module.exports = "/bishop_white.89bc2216.svg";
-},{}],"../src/components/Board.js":[function(require,module,exports) {
-"use strict";
+  // Standard browser envs support document.cookie
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setupChessBoard = setupChessBoard;
+          if (utils.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
 
-var _Utility = require("../core/Utility");
+          if (utils.isString(path)) {
+            cookie.push('path=' + path);
+          }
 
-var _Enums = require("../core/Enums");
+          if (utils.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
 
-var _Settings = _interopRequireDefault(require("../core/Settings"));
+          if (secure === true) {
+            cookie.push('secure');
+          }
 
-var _DragNDrop = require("../core/DragNDrop");
+          document.cookie = cookie.join('; ');
+        },
 
-var _session = _interopRequireDefault(require("../core/session"));
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import '../static/images/pawn'
-var images = {
-  pawn: {
-    black: require('../static/images/pawn_black.svg'),
-    white: require('../static/images/pawn_white.svg')
-  },
-  king: {
-    black: require('../static/images/king_black.svg'),
-    white: require('../static/images/king_white.svg')
-  },
-  queen: {
-    black: require('../static/images/queen_black.svg'),
-    white: require('../static/images/queen_white.svg')
-  },
-  rook: {
-    black: require('../static/images/rook_black.svg'),
-    white: require('../static/images/rook_white.svg')
-  },
-  knight: {
-    black: require('../static/images/knight_black.svg'),
-    white: require('../static/images/knight_white.svg')
-  },
-  bishop: {
-    black: require('../static/images/bishop_black.svg'),
-    white: require('../static/images/bishop_white.svg')
-  }
-};
-var baseImageURL = '../src/static/images/';
-
-function setupChessBoard() {
-  var boardUI = document.querySelector('#chess-board');
-
-  for (var i = 8; i >= 1; i--) {
-    var black = i % 2 === 1;
-
-    for (var j = _Utility.charCodeA; j <= _Utility.charCodeH; j++) {
-      boardUI.innerHTML += "<div class=\"chess-cell ".concat(black ? 'black' : 'white', "\" id=\"").concat(String.fromCharCode(j)).concat(i, "\"></div>");
-      black = !black;
-    }
-  }
-
-  function addImgNodeInGrid(piece, color, grid) {
-    var img = document.createElement("img");
-    img.src = images[piece][color];
-    img.classList.add("svg-piece");
-    img.classList.add("".concat(color, "-piece"));
-    img.dataset.position = grid;
-    img.dataset.piece = _Enums.ChessPiece[piece.toUpperCase()];
-    document.getElementById(grid).appendChild(img);
-  }
-
-  for (var _j = _Utility.charCodeA; _j <= _Utility.charCodeH; _j++) {
-    addImgNodeInGrid('pawn', 'black', "".concat(String.fromCharCode(_j), "7"));
-    addImgNodeInGrid('pawn', 'white', "".concat(String.fromCharCode(_j), "2"));
-  }
-
-  2; // queen
-
-  addImgNodeInGrid('queen', 'white', 'd1');
-  addImgNodeInGrid('queen', 'black', 'd8'); // king
-
-  addImgNodeInGrid('king', 'white', 'e1');
-  addImgNodeInGrid('king', 'black', 'e8'); // bishops
-
-  addImgNodeInGrid('bishop', 'black', 'c8');
-  addImgNodeInGrid('bishop', 'black', 'f8');
-  addImgNodeInGrid('bishop', 'white', 'c1');
-  addImgNodeInGrid('bishop', 'white', 'f1'); // knights 
-
-  addImgNodeInGrid('knight', 'black', 'b8');
-  addImgNodeInGrid('knight', 'black', 'g8');
-  addImgNodeInGrid('knight', 'white', 'b1');
-  addImgNodeInGrid('knight', 'white', 'g1'); // rooks
-
-  addImgNodeInGrid('rook', 'black', 'a8');
-  addImgNodeInGrid('rook', 'black', 'h8');
-  addImgNodeInGrid('rook', 'white', 'a1');
-  addImgNodeInGrid('rook', 'white', 'h1'); //   Rooks
-
-  Board.setByIndex(1, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(8, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(57, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.BLACK
-  });
-  Board.setByIndex(64, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.BLACK
-  }); //   Knights
-
-  Board.setByIndex(2, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(7, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(58, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.BLACK
-  });
-  Board.setByIndex(63, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.BLACK
-  }); //   Bishops
-
-  Board.setByIndex(3, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(6, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(59, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.BLACK
-  });
-  Board.setByIndex(62, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.BLACK
-  }); //   Queens
-
-  Board.setByIndex(4, {
-    piece: _Enums.ChessPiece.QUEEN,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(60, {
-    piece: _Enums.ChessPiece.QUEEN,
-    color: _Enums.Color.BLACK
-  }); //   Kings
-
-  Board.setByIndex(5, {
-    piece: _Enums.ChessPiece.KING,
-    color: _Enums.Color.WHITE
-  });
-  Board.setByIndex(61, {
-    piece: _Enums.ChessPiece.KING,
-    color: _Enums.Color.BLACK
-  }); //   Pawns
-
-  for (var _i = 0; _i < 8; _i++) {
-    Board.setByIndex(9 + _i, {
-      piece: _Enums.ChessPiece.PAWN,
-      color: _Enums.Color.WHITE
-    });
-    Board.setByIndex(49 + _i, {
-      piece: _Enums.ChessPiece.PAWN,
-      color: _Enums.Color.BLACK
-    });
-  } // setting up the pieces
-
-
-  if (_Settings.default.chessBoardType === _Enums.ChessBoardType.PlayGround) {
-    // make pieces draggable
-    $(".svg-piece").draggable({
-      start: _DragNDrop.handleDragStart,
-      cursor: 'move',
-      revert: "invalid",
-      revertDuration: 200
-    });
-    $(".chess-cell").droppable({
-      drop: _DragNDrop.handleDropEvent
-    });
-    $(".svg-piece").click(function (event) {
-      console.log(event);
-      var _event$target$dataset = event.target.dataset,
-          position = _event$target$dataset.position,
-          piece = _event$target$dataset.piece;
-      var gridPiece = Board.board[(0, _Utility.positionToArrayIndex)(position)];
-      Board.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-    }); // $(".chess-cell").click((event) => {
-    //     let id = event.target.id;   
-    //     // if (Board.validMoves.includes(id)) {
-    //     //     console.log("Change position");
-    //     //     pieceSelected = false
-    //     // }
-    //     // else {
-    //     //     console.log("Don't changes position.");
-    //     //     pieceSelected = false;
-    //     // }
-    // })
-  } else if (_Settings.default.chessBoardType === _Enums.ChessBoardType.Match) {
-    // make pieces draggable
-    $(".".concat(_session.default.myColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).draggable({
-      start: _DragNDrop.handleDragStart,
-      cursor: 'move',
-      revert: "invalid",
-      revertDuration: 200
-    });
-    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).attr("draggable", false);
-    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).css('cursor', 'auto');
-    $(".chess-cell").droppable({
-      drop: _DragNDrop.handleDropEvent
-    });
-    $(".svg-piece").click(function (event) {
-      console.log(event);
-      var _event$target$dataset2 = event.target.dataset,
-          position = _event$target$dataset2.position,
-          piece = _event$target$dataset2.piece;
-      var gridPiece = Board.board[(0, _Utility.positionToArrayIndex)(position)];
-      Board.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-    });
-  } else if (_Settings.default.chessBoardType === _Enums.ChessBoardType.Disabled) {
-    $(".svg-piece").attr("draggable", false);
-    $(".svg-piece").css('cursor', 'auto');
-  }
-}
-},{"../core/Utility":"../src/core/Utility.js","../core/Enums":"../src/core/Enums.js","../core/Settings":"../src/core/Settings.js","../core/DragNDrop":"../src/core/DragNDrop.js","../core/session":"../src/core/session.js","../static/images/pawn_black.svg":"../src/static/images/pawn_black.svg","../static/images/pawn_white.svg":"../src/static/images/pawn_white.svg","../static/images/king_black.svg":"../src/static/images/king_black.svg","../static/images/king_white.svg":"../src/static/images/king_white.svg","../static/images/queen_black.svg":"../src/static/images/queen_black.svg","../static/images/queen_white.svg":"../src/static/images/queen_white.svg","../static/images/rook_black.svg":"../src/static/images/rook_black.svg","../static/images/rook_white.svg":"../src/static/images/rook_white.svg","../static/images/knight_black.svg":"../src/static/images/knight_black.svg","../static/images/knight_white.svg":"../src/static/images/knight_white.svg","../static/images/bishop_black.svg":"../src/static/images/bishop_black.svg","../static/images/bishop_white.svg":"../src/static/images/bishop_white.svg"}],"../src/App.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
-
-var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
-
-var _Board = require("./components/Board");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function App() {
-  return _App.apply(this, arguments);
-}
-
-function _App() {
-  _App = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-    var template;
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            (0, _Board.setupChessBoard)();
-            template = document.createElement('template');
-            template.innerHTML = "\n    <div id=\"chess-board\"></div>\n  "; // Return a new node from template
-
-            return _context.abrupt("return", template.content.cloneNode(true));
-
-          case 4:
-          case "end":
-            return _context.stop();
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
         }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+);
+
+},{"./../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/helpers/isAbsoluteURL.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+},{}],"../node_modules/axios/lib/helpers/combineURLs.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+},{}],"../node_modules/axios/lib/core/buildFullPath.js":[function(require,module,exports) {
+'use strict';
+
+var isAbsoluteURL = require('../helpers/isAbsoluteURL');
+var combineURLs = require('../helpers/combineURLs');
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+},{"../helpers/isAbsoluteURL":"../node_modules/axios/lib/helpers/isAbsoluteURL.js","../helpers/combineURLs":"../node_modules/axios/lib/helpers/combineURLs.js"}],"../node_modules/axios/lib/helpers/parseHeaders.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('./../utils');
+
+// Headers whose duplicates are ignored by node
+// c.f. https://nodejs.org/api/http.html#http_message_headers
+var ignoreDuplicateOf = [
+  'age', 'authorization', 'content-length', 'content-type', 'etag',
+  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
+  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
+  'referer', 'retry-after', 'user-agent'
+];
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
+        return;
       }
-    }, _callee);
-  }));
-  return _App.apply(this, arguments);
-}
-
-var _default = App;
-exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","./components/Board":"../src/components/Board.js"}],"../node_modules/@babel/runtime-corejs2/helpers/createClass.js":[function(require,module,exports) {
-var _Object$defineProperty = require("@babel/runtime-corejs2/core-js/object/define-property");
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-
-    _Object$defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{"@babel/runtime-corejs2/core-js/object/define-property":"../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js"}],"../src/core/Board.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Board = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/defineProperty"));
-
-var _Enums = require("./Enums");
-
-var _Utility = require("./Utility");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Board = /*#__PURE__*/function () {
-  function Board() {
-    (0, _classCallCheck2.default)(this, Board);
-  }
-
-  (0, _createClass2.default)(Board, null, [{
-    key: "getPiece",
-    value: function getPiece(position) {
-      return board[(0, _Utility.positionToArrayIndex)(position)];
+      if (key === 'set-cookie') {
+        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
     }
-  }, {
-    key: "setPiece",
-    value: function setPiece(position, piece) {
-      this.board[(0, _Utility.positionToArrayIndex)(position)] = piece;
-    }
-  }, {
-    key: "setByIndex",
-    value: function setByIndex(index, piece) {
-      this.board[index] = piece;
-    }
-  }, {
-    key: "positionToArrayIndex",
-    value: function positionToArrayIndex(position) {
-      var letter = position.charCodeAt(0);
+  });
 
-      var num = position.charCodeAt(1) - _Utility.charCode0;
+  return parsed;
+};
 
-      var letterNum = letter - _Utility.charCodeA + 1;
-      return letterNum + (num - 1) * 8;
-    }
-  }, {
-    key: "highlightPossibleMoves",
-    value: function highlightPossibleMoves(currentPosition, piece, color) {
-      var _this = this;
+},{"./../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/helpers/isURLSameOrigin.js":[function(require,module,exports) {
+'use strict';
 
-      var divBlock = "<div class=\"validMoves\"></div>"; // let possibleMoves = getPossibleMoves(currentPosition, piece, color);
+var utils = require('./../utils');
 
-      this.eraseValidMoves();
-      this.getValidMoves(currentPosition, piece, color);
-      this.validMoves.forEach(function (move) {
-        if (_this.board[(0, _Utility.positionToArrayIndex)(move)].piece === _Enums.ChessPiece.EMPTY) {
-          $("#".concat(move)).append(divBlock);
-        }
-      });
-    }
-  }, {
-    key: "eraseValidMoves",
-    value: function eraseValidMoves() {
-      var _this2 = this;
+module.exports = (
+  utils.isStandardBrowserEnv() ?
 
-      this.validMoves.forEach(function (move) {
-        if (_this2.board[(0, _Utility.positionToArrayIndex)(move)].piece === _Enums.ChessPiece.EMPTY) {
-          $("#".concat(move)).empty();
-        }
-      });
-      this.validMoves = [];
-    }
-  }, {
-    key: "getValidMoves",
-    value: function getValidMoves(currentPosition, piece, color) {
-      function addEntry(i, j) {
-        var pos = "".concat(String.fromCharCode(i)).concat(j);
-        var index = (0, _Utility.positionToArrayIndex)(pos);
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
 
-        if (Board.board[index].piece === _Enums.ChessPiece.EMPTY || Board.board[index].color === color) {
-          Board.validMoves.push(pos);
-          return Board.board[index].color === color ? false : true;
+      /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
         }
 
-        return false;
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
       }
 
-      this.validMoves = [];
-      var letter = currentPosition.charCodeAt(0);
+      originURL = resolveURL(window.location.href);
 
-      var num = currentPosition.charCodeAt(1) - _Utility.charCode0;
+      /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
 
-      if (piece === _Enums.ChessPiece.QUEEN || piece === _Enums.ChessPiece.ROOK || piece === _Enums.ChessPiece.BISHOP) {
-        if (piece === _Enums.ChessPiece.ROOK || piece === _Enums.ChessPiece.QUEEN) {
-          // by row and up
-          for (var i = letter + 1; i <= _Utility.charCodeH; i++) {
-            if (!addEntry(i, num)) break;
-          } // by row and down
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+);
 
+},{"./../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/adapters/xhr.js":[function(require,module,exports) {
+'use strict';
 
-          for (var _i = letter - 1; _i >= _Utility.charCodeA; _i--) {
-            if (!addEntry(_i, num)) break;
-          } // by column and right
+var utils = require('./../utils');
+var settle = require('./../core/settle');
+var cookies = require('./../helpers/cookies');
+var buildURL = require('./../helpers/buildURL');
+var buildFullPath = require('../core/buildFullPath');
+var parseHeaders = require('./../helpers/parseHeaders');
+var isURLSameOrigin = require('./../helpers/isURLSameOrigin');
+var createError = require('../core/createError');
 
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
 
-          for (var _i2 = num + 1; _i2 <= 8; _i2++) {
-            if (!addEntry(letter, _i2)) break;
-          } // by column and left
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
 
+    var request = new XMLHttpRequest();
 
-          for (var _i3 = num - 1; _i3 >= 1; _i3--) {
-            if (!addEntry(letter, _i3)) break;
-          }
-        }
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
 
-        if (piece === _Enums.ChessPiece.BISHOP || piece === _Enums.ChessPiece.QUEEN) {
-          var _i4 = letter - 1,
-              j = num - 1; // left and lower
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
 
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
 
-          while (_i4 >= _Utility.charCodeA && j >= 1) {
-            if (!addEntry(_i4, j)) break;
-            _i4--;
-            j--;
-          }
+    // Listen for ready state
+    request.onreadystatechange = function handleLoad() {
+      if (!request || request.readyState !== 4) {
+        return;
+      }
 
-          _i4 = letter - 1, j = num + 1; // left and higher
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
 
-          while (_i4 >= _Utility.charCodeA && j <= 8) {
-            if (!addEntry(_i4, j)) break;
-            _i4--;
-            j++;
-          }
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
 
-          _i4 = letter + 1, j = num + 1; // right and higher
+      settle(resolve, reject, response);
 
-          while (_i4 <= _Utility.charCodeH && j <= 8) {
-            if (!addEntry(_i4, j)) break;
-            _i4++;
-            j++;
-          }
+      // Clean up request
+      request = null;
+    };
 
-          _i4 = letter + 1, j = num - 1; // right and lower
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
 
-          while (_i4 <= _Utility.charCodeH && j >= 1) {
-            if (!addEntry(_i4, j)) break;
-            _i4++;
-            j--;
-          }
-        }
-      } else if (piece === _Enums.ChessPiece.KNIGHT) {
-        var _i5 = letter - 2;
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
 
-        if (_i5 >= _Utility.charCodeA) {
-          var _j2 = num;
+      // Clean up request
+      request = null;
+    };
 
-          if (_j2 + 1 <= 8) {
-            addEntry(_i5, _j2 + 1);
-          }
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
 
-          if (_j2 - 1 >= 1) {
-            addEntry(_i5, _j2 - 1);
-          }
-        }
+      // Clean up request
+      request = null;
+    };
 
-        _i5 = letter + 2;
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
+        request));
 
-        if (_i5 <= _Utility.charCodeH) {
-          var _j3 = num;
+      // Clean up request
+      request = null;
+    };
 
-          if (_j3 + 1 <= 8) {
-            addEntry(_i5, _j3 + 1);
-          }
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
 
-          if (_j3 - 1 >= 1) {
-            addEntry(_i5, _j3 - 1);
-          }
-        }
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
 
-        var _j = num - 2;
-
-        if (_j >= 1) {
-          var _i6 = letter;
-
-          if (_i6 + 1 <= _Utility.charCodeH) {
-            addEntry(_i6 + 1, _j);
-          }
-
-          if (_i6 - 1 >= _Utility.charCodeA) {
-            addEntry(_i6 - 1, _j);
-          }
-        }
-
-        _j = num + 2;
-
-        if (_j <= 8) {
-          var _i7 = letter;
-
-          if (_i7 + 1 <= _Utility.charCodeH) {
-            addEntry(_i7 + 1, _j);
-          }
-
-          if (_i7 - 1 >= _Utility.charCodeA) {
-            addEntry(_i7 - 1, _j);
-          }
-        }
-      } else if (piece === _Enums.ChessPiece.KING) {
-        var scenarioArray = [1, -1, 0];
-
-        for (var _i8 = 0; _i8 < scenarioArray.length; _i8++) {
-          for (var _j4 = 0; _j4 < scenarioArray.length; _j4++) {
-            if (scenarioArray[_i8] === 0 && scenarioArray[_j4] === 0) continue;
-            var a = letter + scenarioArray[_i8],
-                b = num + scenarioArray[_j4];
-
-            if (a >= _Utility.charCodeA && a <= _Utility.charCodeH && b >= 1 && b <= 8) {
-              addEntry(a, b);
-            }
-          }
-        }
-      } else if (piece === _Enums.ChessPiece.PAWN) {
-        if (_Enums.Color.BLACK === color) {
-          var _i9 = num - 1;
-
-          if (_i9 >= 1) {
-            addEntry(letter, _i9);
-            if (num === 7) addEntry(letter, _i9 - 1);
-          }
-
-          if (letter + 1 <= _Utility.charCodeH && num - 1 >= 1) {
-            var pos = "".concat(String.fromCharCode(letter + 1)).concat(num - 1);
-            var gridPiece = this.board[(0, _Utility.positionToArrayIndex)(pos)];
-
-            if (gridPiece.piece !== _Enums.ChessPiece.EMPTY && gridPiece.color !== color) {
-              this.validMoves.push(pos);
-            }
-          }
-
-          if (letter - 1 >= _Utility.charCodeA && num - 1 >= 1) {
-            var _pos = "".concat(String.fromCharCode(letter - 1)).concat(num - 1);
-
-            var _gridPiece = this.board[(0, _Utility.positionToArrayIndex)(_pos)];
-
-            if (_gridPiece.piece !== _Enums.ChessPiece.EMPTY && _gridPiece.color !== color) {
-              this.validMoves.push(_pos);
-            }
-          }
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
         } else {
-          var _i10 = num + 1;
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
 
-          if (_i10 <= 8) {
-            addEntry(letter, _i10);
-            if (num === 2) addEntry(letter, _i10 + 1);
-          }
+    // Add withCredentials to request if needed
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
+    }
 
-          if (letter + 1 <= _Utility.charCodeH && num + 1 <= 8) {
-            var _pos2 = "".concat(String.fromCharCode(letter + 1)).concat(num + 1);
-
-            var _gridPiece2 = this.board[(0, _Utility.positionToArrayIndex)(_pos2)];
-
-            if (_gridPiece2.piece !== _Enums.ChessPiece.EMPTY && _gridPiece2.color !== color) {
-              this.validMoves.push(_pos2);
-            }
-          }
-
-          if (letter - 1 >= _Utility.charCodeA && num + 1 <= 8) {
-            var _pos3 = "".concat(String.fromCharCode(letter - 1)).concat(num + 1);
-
-            var _gridPiece3 = this.board[(0, _Utility.positionToArrayIndex)(_pos3)];
-
-            if (_gridPiece3.piece !== _Enums.ChessPiece.EMPTY && _gridPiece3.color !== color) {
-              this.validMoves.push(_pos3);
-            }
-          }
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
         }
       }
     }
-  }]);
-  return Board;
-}();
 
-exports.Board = Board;
-(0, _defineProperty2.default)(Board, "board", new Array(65).fill({
-  piece: _Enums.ChessPiece.EMPTY,
-  color: _Enums.Color.EMPTY
-}));
-(0, _defineProperty2.default)(Board, "validMoves", new Array());
-(0, _defineProperty2.default)(Board, "removedPieces", new Array());
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/defineProperty":"../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js","./Enums":"../src/core/Enums.js","./Utility":"../src/core/Utility.js"}],"../node_modules/process/browser.js":[function(require,module,exports) {
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (!requestData) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js"}],"../node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -3415,7 +3566,1433 @@ process.chdir = function (dir) {
 process.umask = function () {
   return 0;
 };
-},{}],"../node_modules/jquery/dist/jquery.js":[function(require,module,exports) {
+},{}],"../node_modules/axios/lib/defaults.js":[function(require,module,exports) {
+var process = require("process");
+'use strict';
+
+var utils = require('./utils');
+var normalizeHeaderName = require('./helpers/normalizeHeaderName');
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = require('./adapters/xhr');
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = require('./adapters/http');
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+  maxBodyLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","process":"../node_modules/process/browser.js"}],"../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('./../utils');
+var transformData = require('./transformData');
+var isCancel = require('../cancel/isCancel');
+var defaults = require('../defaults');
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+},{"./../utils":"../node_modules/axios/lib/utils.js","./transformData":"../node_modules/axios/lib/core/transformData.js","../cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","../defaults":"../node_modules/axios/lib/defaults.js"}],"../node_modules/axios/lib/core/mergeConfig.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('../utils');
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+module.exports = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress',
+    'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'
+  ];
+  var directMergeKeys = ['validateStatus'];
+
+  function getMergedValue(target, source) {
+    if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
+      return utils.merge(target, source);
+    } else if (utils.isPlainObject(source)) {
+      return utils.merge({}, source);
+    } else if (utils.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  function mergeDeepProperties(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    }
+  });
+
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
+
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys)
+    .concat(directMergeKeys);
+
+  var otherKeys = Object
+    .keys(config1)
+    .concat(Object.keys(config2))
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, mergeDeepProperties);
+
+  return config;
+};
+
+},{"../utils":"../node_modules/axios/lib/utils.js"}],"../node_modules/axios/lib/core/Axios.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('./../utils');
+var buildURL = require('../helpers/buildURL');
+var InterceptorManager = require('./InterceptorManager');
+var dispatchRequest = require('./dispatchRequest');
+var mergeConfig = require('./mergeConfig');
+
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = arguments[1] || {};
+    config.url = arguments[0];
+  } else {
+    config = config || {};
+  }
+
+  config = mergeConfig(this.defaults, config);
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
+
+  // Hook up interceptors middleware
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
+
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    chain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+
+  return promise;
+};
+
+Axios.prototype.getUri = function getUri(config) {
+  config = mergeConfig(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: (config || {}).data
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+},{"./../utils":"../node_modules/axios/lib/utils.js","../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","./InterceptorManager":"../node_modules/axios/lib/core/InterceptorManager.js","./dispatchRequest":"../node_modules/axios/lib/core/dispatchRequest.js","./mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js"}],"../node_modules/axios/lib/cancel/Cancel.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+},{}],"../node_modules/axios/lib/cancel/CancelToken.js":[function(require,module,exports) {
+'use strict';
+
+var Cancel = require('./Cancel');
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+module.exports = CancelToken;
+
+},{"./Cancel":"../node_modules/axios/lib/cancel/Cancel.js"}],"../node_modules/axios/lib/helpers/spread.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+},{}],"../node_modules/axios/lib/helpers/isAxiosError.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
+};
+
+},{}],"../node_modules/axios/lib/axios.js":[function(require,module,exports) {
+'use strict';
+
+var utils = require('./utils');
+var bind = require('./helpers/bind');
+var Axios = require('./core/Axios');
+var mergeConfig = require('./core/mergeConfig');
+var defaults = require('./defaults');
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = require('./cancel/Cancel');
+axios.CancelToken = require('./cancel/CancelToken');
+axios.isCancel = require('./cancel/isCancel');
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = require('./helpers/spread');
+
+// Expose isAxiosError
+axios.isAxiosError = require('./helpers/isAxiosError');
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = axios;
+
+},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
+module.exports = require('./lib/axios');
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../src/injectors/Footer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = /*#__PURE__*/function () {
+  var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+    var res, user, template;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _axios.default.get('https://randomuser.me/api');
+
+          case 2:
+            res = _context.sent;
+            user = res.data.results[0];
+            template = "\n    <div class=\"card\">\n      <img src=\"".concat(user.picture.large, "\" />\n      <div class=\"card-body\">\n        <h1>").concat(user.name.first, " ").concat(user.name.last, "</h1>\n        <ul>\n          <li>").concat(user.email, "</li>\n          <li>").concat(user.phone, "</li>\n          <li>").concat(user.location.city, "</li>\n        </ul>\n      </div>\n    </div>\n  ");
+            return _context.abrupt("return", template);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function Footer() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var _default = Footer;
+exports.default = _default;
+},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","axios":"../node_modules/axios/index.js"}],"../src/core/Utility.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.positionToArrayIndex = exports.charCode0 = exports.charCodeH = exports.charCodeA = void 0;
+var charCodeA = "a".charCodeAt(0);
+exports.charCodeA = charCodeA;
+var charCodeH = "h".charCodeAt(0);
+exports.charCodeH = charCodeH;
+var charCode0 = "0".charCodeAt(0);
+exports.charCode0 = charCode0;
+
+var positionToArrayIndex = function positionToArrayIndex(position) {
+  var letter = position.charCodeAt(0);
+  var num = position.charCodeAt(1) - charCode0;
+  var letterNum = letter - charCodeA + 1;
+  return letterNum + (num - 1) * 8;
+};
+
+exports.positionToArrayIndex = positionToArrayIndex;
+},{}],"../src/core/Enums.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ChessBoardType = exports.Color = exports.ChessPiece = void 0;
+// Enum for pieces
+var ChessPiece = {
+  EMPTY: 0,
+  KING: 1,
+  QUEEN: 2,
+  ROOK: 3,
+  BISHOP: 4,
+  KNIGHT: 5,
+  PAWN: 6
+};
+exports.ChessPiece = ChessPiece;
+var Color = {
+  EMPTY: 0,
+  BLACK: 1,
+  WHITE: 2
+};
+exports.Color = Color;
+var ChessBoardType = {
+  PlayGround: 0,
+  Match: 1,
+  Disabled: 2
+};
+exports.ChessBoardType = ChessBoardType;
+},{}],"../src/core/settings.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Enums = require("./Enums");
+
+var settings = {
+  chessBoardType: _Enums.ChessBoardType.PlayGround,
+  colorCombination: {
+    black: '#937171',
+    white: 'wheat'
+  }
+};
+var _default = settings;
+exports.default = _default;
+},{"./Enums":"../src/core/Enums.js"}],"../node_modules/core-js/library/modules/_string-ws.js":[function(require,module,exports) {
+module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
+  '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
+
+},{}],"../node_modules/core-js/library/modules/_string-trim.js":[function(require,module,exports) {
+var $export = require('./_export');
+var defined = require('./_defined');
+var fails = require('./_fails');
+var spaces = require('./_string-ws');
+var space = '[' + spaces + ']';
+var non = '\u200b\u0085';
+var ltrim = RegExp('^' + space + space + '*');
+var rtrim = RegExp(space + space + '*$');
+
+var exporter = function (KEY, exec, ALIAS) {
+  var exp = {};
+  var FORCE = fails(function () {
+    return !!spaces[KEY]() || non[KEY]() != non;
+  });
+  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];
+  if (ALIAS) exp[ALIAS] = fn;
+  $export($export.P + $export.F * FORCE, 'String', exp);
+};
+
+// 1 -> String#trimLeft
+// 2 -> String#trimRight
+// 3 -> String#trim
+var trim = exporter.trim = function (string, TYPE) {
+  string = String(defined(string));
+  if (TYPE & 1) string = string.replace(ltrim, '');
+  if (TYPE & 2) string = string.replace(rtrim, '');
+  return string;
+};
+
+module.exports = exporter;
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_defined":"../node_modules/core-js/library/modules/_defined.js","./_fails":"../node_modules/core-js/library/modules/_fails.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/_parse-int.js":[function(require,module,exports) {
+var $parseInt = require('./_global').parseInt;
+var $trim = require('./_string-trim').trim;
+var ws = require('./_string-ws');
+var hex = /^[-+]?0[xX]/;
+
+module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? function parseInt(str, radix) {
+  var string = $trim(String(str), 3);
+  return $parseInt(string, (radix >>> 0) || (hex.test(string) ? 16 : 10));
+} : $parseInt;
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_string-trim":"../node_modules/core-js/library/modules/_string-trim.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/es6.parse-int.js":[function(require,module,exports) {
+var $export = require('./_export');
+var $parseInt = require('./_parse-int');
+// 18.2.5 parseInt(string, radix)
+$export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_parse-int":"../node_modules/core-js/library/modules/_parse-int.js"}],"../node_modules/core-js/library/fn/parse-int.js":[function(require,module,exports) {
+require('../modules/es6.parse-int');
+module.exports = require('../modules/_core').parseInt;
+
+},{"../modules/es6.parse-int":"../node_modules/core-js/library/modules/es6.parse-int.js","../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/parse-int");
+},{"core-js/library/fn/parse-int":"../node_modules/core-js/library/fn/parse-int.js"}],"../src/static/sound/Move_Sound_Effect.wav":[function(require,module,exports) {
+module.exports = "/Move_Sound_Effect.f1e2673e.wav";
+},{}],"../src/core/Sounds.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.moveSound = void 0;
+// move sounds
+var moveSound = new Audio(require('../static/sound/Move_Sound_Effect.wav'));
+exports.moveSound = moveSound;
+},{"../static/sound/Move_Sound_Effect.wav":"../src/static/sound/Move_Sound_Effect.wav"}],"../src/core/DragNDrop.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.handleDropEvent = exports.handleDragStart = void 0;
+
+var _parseInt2 = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/parse-int"));
+
+var _Utility = require("./Utility");
+
+var _Enums = require("./Enums");
+
+var _Sounds = require("./Sounds");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var handleDragStart = function handleDragStart(event) {
+  var _event$target$dataset = event.target.dataset,
+      position = _event$target$dataset.position,
+      piece = _event$target$dataset.piece;
+  event.target.style.zIndex = '9999';
+  chessBoard.eraseValidMoves();
+  var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(position)];
+  chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+};
+
+exports.handleDragStart = handleDragStart;
+
+var handleDropEvent = function handleDropEvent(event, ui) {
+  var pieceUI = ui.draggable[0];
+  var startPosition = pieceUI.dataset.position;
+  var destPosition = event.target.id;
+  console.log("start postion: ".concat(startPosition, ", destination postion: ").concat(destPosition));
+
+  if (startPosition === destPosition) {
+    ui.draggable.draggable('option', 'revert', "valid");
+    pieceUI.style.zIndex = '0';
+    return;
+  }
+
+  if (!chessBoard.validMoves.includes(destPosition)) {
+    ui.draggable.draggable('option', 'revert', "valid");
+    pieceUI.style.zIndex = '0';
+    return;
+  } else {
+    pieceUI.style.zIndex = '0';
+    chessBoard.eraseValidMoves();
+    console.log(ui.draggable[0]);
+    var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(startPosition)];
+    var destPosPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(destPosition)];
+
+    if (destPosPiece.piece !== _Enums.ChessPiece.EMPTY) {
+      chessBoard.removedPieces.push(destPosPiece);
+      $("#".concat(destPosition)).empty();
+    }
+
+    pieceUI.dataset.position = destPosition;
+    pieceUI.style.top = '0px';
+    pieceUI.style.left = '0px';
+    event.target.append(pieceUI);
+    var piece = (0, _parseInt2.default)(gridPiece.piece);
+    var color = (0, _parseInt2.default)(gridPiece.color);
+
+    if (piece === _Enums.ChessPiece.KING || piece === _Enums.ChessPiece.ROOK) {//
+    } // update position in ChesschessBoard Array
+
+
+    chessBoard.board[(0, _Utility.positionToArrayIndex)(startPosition)] = {
+      piece: _Enums.ChessPiece.EMPTY,
+      color: _Enums.Color.EMPTY
+    };
+    chessBoard.board[(0, _Utility.positionToArrayIndex)(destPosition)] = {
+      piece: piece,
+      color: color
+    }; // play sound
+
+    _Sounds.moveSound.play();
+
+    ui.draggable.draggable('option', 'revert', "invalid");
+  }
+};
+
+exports.handleDropEvent = handleDropEvent;
+},{"@babel/runtime-corejs2/core-js/parse-int":"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js","./Utility":"../src/core/Utility.js","./Enums":"../src/core/Enums.js","./Sounds":"../src/core/Sounds.js"}],"../src/core/session.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Enums = require("./Enums");
+
+var Session = {
+  myColor: _Enums.Color.WHITE,
+  opponentColor: _Enums.Color.BLACK
+};
+var _default = Session;
+exports.default = _default;
+},{"./Enums":"../src/core/Enums.js"}],"../src/static/images/pawn_black.svg":[function(require,module,exports) {
+module.exports = "/pawn_black.dc2ccb3c.svg";
+},{}],"../src/static/images/pawn_white.svg":[function(require,module,exports) {
+module.exports = "/pawn_white.4a259157.svg";
+},{}],"../src/static/images/king_black.svg":[function(require,module,exports) {
+module.exports = "/king_black.8c980b8d.svg";
+},{}],"../src/static/images/king_white.svg":[function(require,module,exports) {
+module.exports = "/king_white.b95757a4.svg";
+},{}],"../src/static/images/queen_black.svg":[function(require,module,exports) {
+module.exports = "/queen_black.c6d3ff88.svg";
+},{}],"../src/static/images/queen_white.svg":[function(require,module,exports) {
+module.exports = "/queen_white.fd9a7ff5.svg";
+},{}],"../src/static/images/rook_black.svg":[function(require,module,exports) {
+module.exports = "/rook_black.4c664f80.svg";
+},{}],"../src/static/images/rook_white.svg":[function(require,module,exports) {
+module.exports = "/rook_white.d389c1f7.svg";
+},{}],"../src/static/images/knight_black.svg":[function(require,module,exports) {
+module.exports = "/knight_black.61eac6ee.svg";
+},{}],"../src/static/images/knight_white.svg":[function(require,module,exports) {
+module.exports = "/knight_white.fc99a87d.svg";
+},{}],"../src/static/images/bishop_black.svg":[function(require,module,exports) {
+module.exports = "/bishop_black.3c937dba.svg";
+},{}],"../src/static/images/bishop_white.svg":[function(require,module,exports) {
+module.exports = "/bishop_white.89bc2216.svg";
+},{}],"../src/injectors/Board.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setupChessBoard = setupChessBoard;
+
+var _Utility = require("../core/Utility");
+
+var _Enums = require("../core/Enums");
+
+var _settings = _interopRequireDefault(require("../core/settings"));
+
+var _DragNDrop = require("../core/DragNDrop");
+
+var _session = _interopRequireDefault(require("../core/session"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import '../static/images/pawn'
+var images = {
+  pawn: {
+    black: require('../static/images/pawn_black.svg'),
+    white: require('../static/images/pawn_white.svg')
+  },
+  king: {
+    black: require('../static/images/king_black.svg'),
+    white: require('../static/images/king_white.svg')
+  },
+  queen: {
+    black: require('../static/images/queen_black.svg'),
+    white: require('../static/images/queen_white.svg')
+  },
+  rook: {
+    black: require('../static/images/rook_black.svg'),
+    white: require('../static/images/rook_white.svg')
+  },
+  knight: {
+    black: require('../static/images/knight_black.svg'),
+    white: require('../static/images/knight_white.svg')
+  },
+  bishop: {
+    black: require('../static/images/bishop_black.svg'),
+    white: require('../static/images/bishop_white.svg')
+  }
+};
+var baseImageURL = '../src/static/images/';
+
+function setupChessBoard(id) {
+  $('board').droppable = false;
+  var boardUI = document.querySelector("#".concat(id));
+
+  for (var i = 8; i >= 1; i--) {
+    var black = i % 2 === 1;
+
+    for (var j = _Utility.charCodeA; j <= _Utility.charCodeH; j++) {
+      boardUI.innerHTML += "<div class=\"chess-cell ".concat(black ? 'black' : 'white', "\" id=\"").concat(String.fromCharCode(j)).concat(i, "\"></div>");
+      black = !black;
+    }
+  }
+
+  function addImgNodeInGrid(piece, color, grid) {
+    var img = document.createElement("img");
+    img.src = images[piece][color];
+    img.classList.add("svg-piece");
+    img.classList.add("".concat(color, "-piece"));
+    img.dataset.position = grid;
+    img.dataset.piece = _Enums.ChessPiece[piece.toUpperCase()];
+    document.getElementById(grid).appendChild(img);
+  }
+
+  for (var _j = _Utility.charCodeA; _j <= _Utility.charCodeH; _j++) {
+    addImgNodeInGrid('pawn', 'black', "".concat(String.fromCharCode(_j), "7"));
+    addImgNodeInGrid('pawn', 'white', "".concat(String.fromCharCode(_j), "2"));
+  }
+
+  2; // queen
+
+  addImgNodeInGrid('queen', 'white', 'd1');
+  addImgNodeInGrid('queen', 'black', 'd8'); // king
+
+  addImgNodeInGrid('king', 'white', 'e1');
+  addImgNodeInGrid('king', 'black', 'e8'); // bishops
+
+  addImgNodeInGrid('bishop', 'black', 'c8');
+  addImgNodeInGrid('bishop', 'black', 'f8');
+  addImgNodeInGrid('bishop', 'white', 'c1');
+  addImgNodeInGrid('bishop', 'white', 'f1'); // knights 
+
+  addImgNodeInGrid('knight', 'black', 'b8');
+  addImgNodeInGrid('knight', 'black', 'g8');
+  addImgNodeInGrid('knight', 'white', 'b1');
+  addImgNodeInGrid('knight', 'white', 'g1'); // rooks
+
+  addImgNodeInGrid('rook', 'black', 'a8');
+  addImgNodeInGrid('rook', 'black', 'h8');
+  addImgNodeInGrid('rook', 'white', 'a1');
+  addImgNodeInGrid('rook', 'white', 'h1'); //   Rooks
+
+  chessBoard.setByIndex(1, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(8, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(57, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.BLACK
+  });
+  chessBoard.setByIndex(64, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.BLACK
+  }); //   Knights
+
+  chessBoard.setByIndex(2, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(7, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(58, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.BLACK
+  });
+  chessBoard.setByIndex(63, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.BLACK
+  }); //   Bishops
+
+  chessBoard.setByIndex(3, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(6, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(59, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.BLACK
+  });
+  chessBoard.setByIndex(62, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.BLACK
+  }); //   Queens
+
+  chessBoard.setByIndex(4, {
+    piece: _Enums.ChessPiece.QUEEN,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(60, {
+    piece: _Enums.ChessPiece.QUEEN,
+    color: _Enums.Color.BLACK
+  }); //   Kings
+
+  chessBoard.setByIndex(5, {
+    piece: _Enums.ChessPiece.KING,
+    color: _Enums.Color.WHITE
+  });
+  chessBoard.setByIndex(61, {
+    piece: _Enums.ChessPiece.KING,
+    color: _Enums.Color.BLACK
+  }); //   Pawns
+
+  for (var _i = 0; _i < 8; _i++) {
+    chessBoard.setByIndex(9 + _i, {
+      piece: _Enums.ChessPiece.PAWN,
+      color: _Enums.Color.WHITE
+    });
+    chessBoard.setByIndex(49 + _i, {
+      piece: _Enums.ChessPiece.PAWN,
+      color: _Enums.Color.BLACK
+    });
+  }
+
+  var dragConfig = {
+    start: _DragNDrop.handleDragStart,
+    containment: "#chess-board",
+    scroll: false,
+    cursor: 'move',
+    revert: "invalid",
+    revertDuration: 200
+  };
+  var dropConfig = {
+    drop: _DragNDrop.handleDropEvent,
+    accept: '.svg-piece',
+    hoverClass: 'hoverEffect'
+  }; // setting up the pieces
+
+  if (_settings.default.chessBoardType === _Enums.ChessBoardType.PlayGround) {
+    // make pieces draggable
+    $(".svg-piece").draggable(dragConfig);
+    $(".chess-cell").droppable(dropConfig);
+    $(".svg-piece").click(function (event) {
+      console.log(event);
+      var _event$target$dataset = event.target.dataset,
+          position = _event$target$dataset.position,
+          piece = _event$target$dataset.piece;
+      var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(position)];
+      chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+    }); // $(".chess-cell").click((event) => {
+    //     let id = event.target.id;   
+    //     // if (chessBoard.validMoves.includes(id)) {
+    //     //     console.log("Change position");
+    //     //     pieceSelected = false
+    //     // }
+    //     // else {
+    //     //     console.log("Don't changes position.");
+    //     //     pieceSelected = false;
+    //     // }
+    // })
+  } else if (_settings.default.chessBoardType === _Enums.ChessBoardType.Match) {
+    // make pieces draggable
+    $(".".concat(_session.default.myColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).draggable(dragConfig);
+    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).attr("draggable", false);
+    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).css('cursor', 'auto');
+    $(".chess-cell").droppable(dropConfig);
+    $(".svg-piece").click(function (event) {
+      console.log(event);
+      var _event$target$dataset2 = event.target.dataset,
+          position = _event$target$dataset2.position,
+          piece = _event$target$dataset2.piece;
+      var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(position)];
+      chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+    });
+  } else if (_settings.default.chessBoardType === _Enums.ChessBoardType.Disabled) {
+    $(".svg-piece").attr("draggable", false);
+    $(".svg-piece").css('cursor', 'auto');
+  }
+}
+},{"../core/Utility":"../src/core/Utility.js","../core/Enums":"../src/core/Enums.js","../core/settings":"../src/core/settings.js","../core/DragNDrop":"../src/core/DragNDrop.js","../core/session":"../src/core/session.js","../static/images/pawn_black.svg":"../src/static/images/pawn_black.svg","../static/images/pawn_white.svg":"../src/static/images/pawn_white.svg","../static/images/king_black.svg":"../src/static/images/king_black.svg","../static/images/king_white.svg":"../src/static/images/king_white.svg","../static/images/queen_black.svg":"../src/static/images/queen_black.svg","../static/images/queen_white.svg":"../src/static/images/queen_white.svg","../static/images/rook_black.svg":"../src/static/images/rook_black.svg","../static/images/rook_white.svg":"../src/static/images/rook_white.svg","../static/images/knight_black.svg":"../src/static/images/knight_black.svg","../static/images/knight_white.svg":"../src/static/images/knight_white.svg","../static/images/bishop_black.svg":"../src/static/images/bishop_black.svg","../static/images/bishop_white.svg":"../src/static/images/bishop_white.svg"}],"../src/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
+
+var _Header = _interopRequireDefault(require("./injectors/Header"));
+
+var _Footer = _interopRequireDefault(require("./injectors/Footer"));
+
+var _Board = require("./injectors/Board");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function App(_x) {
+  return _App.apply(this, arguments);
+}
+
+function _App() {
+  _App = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(id) {
+    var boardId, template;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            (0, _Header.default)(id);
+            boardId = 'chess-board';
+            template = "<div id=\"".concat(boardId, "\"></div>");
+            $("#".concat(id)).append(template);
+            (0, _Board.setupChessBoard)(boardId);
+            (0, _Footer.default)(id);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _App.apply(this, arguments);
+}
+
+var _default = App;
+exports.default = _default;
+},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","./injectors/Header":"../src/injectors/Header.js","./injectors/Footer":"../src/injectors/Footer.js","./injectors/Board":"../src/injectors/Board.js"}],"../src/core/chessBoard.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Enums = require("./Enums");
+
+var _Utility = require("./Utility");
+
+var chessBoard = {
+  // current position of pieces
+  board: new Array(65).fill({
+    piece: _Enums.ChessPiece.EMPTY,
+    color: _Enums.Color.EMPTY
+  }),
+  // valid moves for current situation
+  validMoves: new Array(),
+  // pieces captured
+  removedPieces: new Array(),
+  // get pieces by position for eg. 'a4'
+  getPiece: function getPiece(position) {
+    return this.board[(0, _Utility.positionToArrayIndex)(position)];
+  },
+  // set piece by position
+  setPiece: function setPiece(position, piece) {
+    this.board[(0, _Utility.positionToArrayIndex)(position)] = piece;
+  },
+  // set board array using direct index
+  setByIndex: function setByIndex(index, piece) {
+    this.board[index] = piece;
+  },
+  // evaluate array index of board from position string
+  positionToArrayIndex: function positionToArrayIndex(position) {
+    var letter = position.charCodeAt(0);
+
+    var num = position.charCodeAt(1) - _Utility.charCode0;
+
+    var letterNum = letter - _Utility.charCodeA + 1;
+    return letterNum + (num - 1) * 8;
+  },
+  // highlight valid moves on board UI
+  highlightPossibleMoves: function highlightPossibleMoves(currentPosition, piece, color) {
+    var _this = this;
+
+    var divBlock = "<div class=\"validMoves\"></div>"; // let possibleMoves = getPossibleMoves(currentPosition, piece, color);
+
+    this.eraseValidMoves();
+    this.getValidMoves(currentPosition, piece, color);
+    this.validMoves.forEach(function (move) {
+      if (_this.board[(0, _Utility.positionToArrayIndex)(move)].piece === _Enums.ChessPiece.EMPTY) {
+        $("#".concat(move)).append(divBlock);
+      }
+    });
+  },
+  eraseValidMoves: function eraseValidMoves() {
+    var _this2 = this;
+
+    this.validMoves.forEach(function (move) {
+      if (_this2.board[(0, _Utility.positionToArrayIndex)(move)].piece === _Enums.ChessPiece.EMPTY) {
+        $("#".concat(move)).empty();
+      }
+    });
+    this.validMoves = [];
+  },
+  // evaluates valid moves
+  getValidMoves: function getValidMoves(currentPosition, piece, color) {
+    var _this3 = this;
+
+    var addEntry = function addEntry(i, j) {
+      var pos = "".concat(String.fromCharCode(i)).concat(j);
+      var index = (0, _Utility.positionToArrayIndex)(pos);
+
+      if (_this3.board[index].piece === _Enums.ChessPiece.EMPTY || _this3.board[index].color === color) {
+        _this3.validMoves.push(pos);
+
+        return _this3.board[index].color === color ? false : true;
+      }
+
+      return false;
+    };
+
+    this.validMoves = [];
+    var letter = currentPosition.charCodeAt(0);
+
+    var num = currentPosition.charCodeAt(1) - _Utility.charCode0;
+
+    if (piece === _Enums.ChessPiece.QUEEN || piece === _Enums.ChessPiece.ROOK || piece === _Enums.ChessPiece.BISHOP) {
+      if (piece === _Enums.ChessPiece.ROOK || piece === _Enums.ChessPiece.QUEEN) {
+        // by row and up
+        for (var i = letter + 1; i <= _Utility.charCodeH; i++) {
+          if (!addEntry(i, num)) break;
+        } // by row and down
+
+
+        for (var _i = letter - 1; _i >= _Utility.charCodeA; _i--) {
+          if (!addEntry(_i, num)) break;
+        } // by column and right
+
+
+        for (var _i2 = num + 1; _i2 <= 8; _i2++) {
+          if (!addEntry(letter, _i2)) break;
+        } // by column and left
+
+
+        for (var _i3 = num - 1; _i3 >= 1; _i3--) {
+          if (!addEntry(letter, _i3)) break;
+        }
+      }
+
+      if (piece === _Enums.ChessPiece.BISHOP || piece === _Enums.ChessPiece.QUEEN) {
+        var _i4 = letter - 1,
+            j = num - 1; // left and lower
+
+
+        while (_i4 >= _Utility.charCodeA && j >= 1) {
+          if (!addEntry(_i4, j)) break;
+          _i4--;
+          j--;
+        }
+
+        _i4 = letter - 1, j = num + 1; // left and higher
+
+        while (_i4 >= _Utility.charCodeA && j <= 8) {
+          if (!addEntry(_i4, j)) break;
+          _i4--;
+          j++;
+        }
+
+        _i4 = letter + 1, j = num + 1; // right and higher
+
+        while (_i4 <= _Utility.charCodeH && j <= 8) {
+          if (!addEntry(_i4, j)) break;
+          _i4++;
+          j++;
+        }
+
+        _i4 = letter + 1, j = num - 1; // right and lower
+
+        while (_i4 <= _Utility.charCodeH && j >= 1) {
+          if (!addEntry(_i4, j)) break;
+          _i4++;
+          j--;
+        }
+      }
+    } else if (piece === _Enums.ChessPiece.KNIGHT) {
+      var _i5 = letter - 2;
+
+      if (_i5 >= _Utility.charCodeA) {
+        var _j2 = num;
+
+        if (_j2 + 1 <= 8) {
+          addEntry(_i5, _j2 + 1);
+        }
+
+        if (_j2 - 1 >= 1) {
+          addEntry(_i5, _j2 - 1);
+        }
+      }
+
+      _i5 = letter + 2;
+
+      if (_i5 <= _Utility.charCodeH) {
+        var _j3 = num;
+
+        if (_j3 + 1 <= 8) {
+          addEntry(_i5, _j3 + 1);
+        }
+
+        if (_j3 - 1 >= 1) {
+          addEntry(_i5, _j3 - 1);
+        }
+      }
+
+      var _j = num - 2;
+
+      if (_j >= 1) {
+        var _i6 = letter;
+
+        if (_i6 + 1 <= _Utility.charCodeH) {
+          addEntry(_i6 + 1, _j);
+        }
+
+        if (_i6 - 1 >= _Utility.charCodeA) {
+          addEntry(_i6 - 1, _j);
+        }
+      }
+
+      _j = num + 2;
+
+      if (_j <= 8) {
+        var _i7 = letter;
+
+        if (_i7 + 1 <= _Utility.charCodeH) {
+          addEntry(_i7 + 1, _j);
+        }
+
+        if (_i7 - 1 >= _Utility.charCodeA) {
+          addEntry(_i7 - 1, _j);
+        }
+      }
+    } else if (piece === _Enums.ChessPiece.KING) {
+      var scenarioArray = [1, -1, 0];
+
+      for (var _i8 = 0; _i8 < scenarioArray.length; _i8++) {
+        for (var _j4 = 0; _j4 < scenarioArray.length; _j4++) {
+          if (scenarioArray[_i8] === 0 && scenarioArray[_j4] === 0) continue;
+          var a = letter + scenarioArray[_i8],
+              b = num + scenarioArray[_j4];
+
+          if (a >= _Utility.charCodeA && a <= _Utility.charCodeH && b >= 1 && b <= 8) {
+            addEntry(a, b);
+          }
+        }
+      }
+    } else if (piece === _Enums.ChessPiece.PAWN) {
+      if (_Enums.Color.BLACK === color) {
+        var _i9 = num - 1;
+
+        if (_i9 >= 1) {
+          addEntry(letter, _i9);
+          if (num === 7) addEntry(letter, _i9 - 1);
+        }
+
+        if (letter + 1 <= _Utility.charCodeH && num - 1 >= 1) {
+          var pos = "".concat(String.fromCharCode(letter + 1)).concat(num - 1);
+          var gridPiece = this.board[(0, _Utility.positionToArrayIndex)(pos)];
+
+          if (gridPiece.piece !== _Enums.ChessPiece.EMPTY && gridPiece.color !== color) {
+            this.validMoves.push(pos);
+          }
+        }
+
+        if (letter - 1 >= _Utility.charCodeA && num - 1 >= 1) {
+          var _pos = "".concat(String.fromCharCode(letter - 1)).concat(num - 1);
+
+          var _gridPiece = this.board[(0, _Utility.positionToArrayIndex)(_pos)];
+
+          if (_gridPiece.piece !== _Enums.ChessPiece.EMPTY && _gridPiece.color !== color) {
+            this.validMoves.push(_pos);
+          }
+        }
+      } else {
+        var _i10 = num + 1;
+
+        if (_i10 <= 8) {
+          addEntry(letter, _i10);
+          if (num === 2) addEntry(letter, _i10 + 1);
+        }
+
+        if (letter + 1 <= _Utility.charCodeH && num + 1 <= 8) {
+          var _pos2 = "".concat(String.fromCharCode(letter + 1)).concat(num + 1);
+
+          var _gridPiece2 = this.board[(0, _Utility.positionToArrayIndex)(_pos2)];
+
+          if (_gridPiece2.piece !== _Enums.ChessPiece.EMPTY && _gridPiece2.color !== color) {
+            this.validMoves.push(_pos2);
+          }
+        }
+
+        if (letter - 1 >= _Utility.charCodeA && num + 1 <= 8) {
+          var _pos3 = "".concat(String.fromCharCode(letter - 1)).concat(num + 1);
+
+          var _gridPiece3 = this.board[(0, _Utility.positionToArrayIndex)(_pos3)];
+
+          if (_gridPiece3.piece !== _Enums.ChessPiece.EMPTY && _gridPiece3.color !== color) {
+            this.validMoves.push(_pos3);
+          }
+        }
+      }
+    }
+  }
+};
+var _default = chessBoard;
+exports.default = _default;
+},{"./Enums":"../src/core/Enums.js","./Utility":"../src/core/Utility.js"}],"../node_modules/jquery/dist/jquery.js":[function(require,module,exports) {
 var global = arguments[3];
 var process = require("process");
 var define;
@@ -33018,17 +34595,21 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regene
 
 var _App = _interopRequireDefault(require("./App"));
 
-var _Board = require("./core/Board");
+var _chessBoard = _interopRequireDefault(require("./core/chessBoard"));
+
+var _Board = require("./injectors/Board");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var jquery = require("jquery");
+// chessBoard object representation
+window.chessBoard = _chessBoard.default; // get jquery object here
 
-window.$ = window.jQuery = jquery; // notice the definition of global variables here
+var jquery = require("jquery"); // assign it to global scope
+
+
+window.$ = window.jQuery = jquery; // require jquery ui dist
 
 require("jquery-ui-dist/jquery-ui.js");
-
-window.Board = _Board.Board;
 
 var app = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
@@ -33036,16 +34617,9 @@ var app = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.t0 = document.getElementById('app');
-            _context.next = 3;
-            return (0, _App.default)();
+            (0, _App.default)("app");
 
-          case 3:
-            _context.t1 = _context.sent;
-
-            _context.t0.appendChild.call(_context.t0, _context.t1);
-
-          case 5:
+          case 1:
           case "end":
             return _context.stop();
         }
@@ -33060,7 +34634,7 @@ var app = /*#__PURE__*/function () {
 
 
 app();
-},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","./App":"../src/App.js","./core/Board":"../src/core/Board.js","jquery":"../node_modules/jquery/dist/jquery.js","jquery-ui-dist/jquery-ui.js":"../node_modules/jquery-ui-dist/jquery-ui.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","./App":"../src/App.js","./core/chessBoard":"../src/core/chessBoard.js","./injectors/Board":"../src/injectors/Board.js","jquery":"../node_modules/jquery/dist/jquery.js","jquery-ui-dist/jquery-ui.js":"../node_modules/jquery-ui-dist/jquery-ui.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33088,7 +34662,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61751" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58321" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
