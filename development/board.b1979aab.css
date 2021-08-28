@@ -1,0 +1,115 @@
+#chess-board {
+  width: 88vh;
+  height: 88vh;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  margin: 12px auto;
+  transition-property: all 200ms ease-in;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.chess-cell {
+  height: 11vh;
+  width: 11vh;
+  height: 11vh;
+  width: 11vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: cadetblue;
+}
+
+.black {
+  background-color: #937171;
+}
+
+.white {
+  background-color: wheat;
+}
+
+.svg-piece {
+  height: 11vh;
+  width: 11vh;
+  cursor: grab;
+}
+
+.container {
+  text-align: center;
+  margin: 15px;
+}
+
+body {
+  margin: 0px;
+  background-color: #252222;
+}
+
+.mainBtn {
+  font-size: medium;
+  padding: 5px 18px;
+  width: 153px;
+  cursor: pointer;
+}
+
+.black-piece {
+  fill: black;
+}
+
+.white-piece {
+  fill: white;
+}
+
+.white .notation {
+  color: #937171;
+}
+
+.black .notation {
+  color: wheat;
+}
+
+.validMoves {
+  width: 3.5vh;
+  height: 3.5vh;
+  background-color: #505155;
+  display: table-cellk;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+/* 
+.hoverEffectOnDragging:hover {
+    outline: 3px solid #5d3b3b;
+    outline-offset: -1px;
+} */
+i {
+  color: #daa94f;
+  cursor: pointer;
+}
+
+.hoverEffect {
+  filter: hue-rotate(45deg);
+}
+
+#modalTable {
+  width: 100%;
+}
+
+.modalSelectStyle {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
+.chess-cell {
+  cursor: pointer;
+}
+
+.rightClickEffect {
+  background-color: red;
+}
+
+/*# sourceMappingURL=/board.b1979aab.css.map */
