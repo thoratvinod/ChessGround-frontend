@@ -2301,16 +2301,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var headerController = function headerController() {
-  $('#btnSetting').click(function (event) {
-    console.log("Clicked...");
-    $('#settingModal').dialog();
-  });
-};
-
 var Header = function Header(id) {
-  var template = "\n      <Header>\n        <i class='fa fa-cog' id=\"btnSetting\"></i>\n        <div id=\"settingModal\" title=\"Basic dialog\" hidden>\n          <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>\n        </div>\n      </Header>\n    ";
-  $("#".concat(id)).append(template);
+  var saveSettings = function saveSettings(settings) {
+    console.log();
+  };
+
+  var headerController = function headerController() {
+    $('#btnSetting').click(function (event) {
+      console.log("Clicked...");
+      $('#settingModal').dialog({
+        minWidth: 500,
+        minHeight: 500,
+        title: "Settings"
+      });
+    });
+  };
+
+  var template = "\n    <Header>\n      <i class='fa fa-cog' id=\"btnSetting\"></i>\n      <div id=\"settingModal\" title=\"Basic dialog\" hidden>\n        <table id=\"modalTable\">\n          <tbody>\n            <tr>\n              <td>Choose board type:  </td>\n              <td>\n                <select class=\"modalSelectStyle\">\n                  <option>PlayGround</option>\n                  <option>Match</option>\n                  <option>Disable</option>\n                </select>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </Header>\n      ";
+  $("#".concat(id)).append(template); // $('#boardTypeDropdown').selectmenu();
+
   headerController();
 };
 
@@ -4305,438 +4314,46 @@ exports.moveSound = void 0;
 // move sounds
 var moveSound = new Audio(require('../static/sound/Move_Sound_Effect.wav'));
 exports.moveSound = moveSound;
-},{"../static/sound/Move_Sound_Effect.wav":"../src/static/sound/Move_Sound_Effect.wav"}],"../src/core/DragNDrop.js":[function(require,module,exports) {
+},{"../static/sound/Move_Sound_Effect.wav":"../src/static/sound/Move_Sound_Effect.wav"}],"../src/core/chessBoard.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.handleDropEvent = exports.handleDragStart = void 0;
-
-var _parseInt2 = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/parse-int"));
-
-var _Utility = require("./Utility");
+exports.default = void 0;
 
 var _Enums = require("./Enums");
 
 var _Sounds = require("./Sounds");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var handleDragStart = function handleDragStart(event) {
-  var _event$target$dataset = event.target.dataset,
-      position = _event$target$dataset.position,
-      piece = _event$target$dataset.piece;
-  event.target.style.zIndex = '9999';
-  chessBoard.eraseValidMoves();
-  var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(position)];
-  chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-};
-
-exports.handleDragStart = handleDragStart;
-
-var handleDropEvent = function handleDropEvent(event, ui) {
-  var pieceUI = ui.draggable[0];
-  var startPosition = pieceUI.dataset.position;
-  var destPosition = event.target.id;
-  console.log("start postion: ".concat(startPosition, ", destination postion: ").concat(destPosition));
-
-  if (startPosition === destPosition) {
-    ui.draggable.draggable('option', 'revert', "valid");
-    pieceUI.style.zIndex = '0';
-    return;
-  }
-
-  if (!chessBoard.validMoves.includes(destPosition)) {
-    ui.draggable.draggable('option', 'revert', "valid");
-    pieceUI.style.zIndex = '0';
-    return;
-  } else {
-    pieceUI.style.zIndex = '0';
-    chessBoard.eraseValidMoves();
-    console.log(ui.draggable[0]);
-    var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(startPosition)];
-    var destPosPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(destPosition)];
-
-    if (destPosPiece.piece !== _Enums.ChessPiece.EMPTY) {
-      chessBoard.removedPieces.push(destPosPiece);
-      $("#".concat(destPosition)).empty();
-    }
-
-    pieceUI.dataset.position = destPosition;
-    pieceUI.style.top = '0px';
-    pieceUI.style.left = '0px';
-    event.target.append(pieceUI);
-    var piece = (0, _parseInt2.default)(gridPiece.piece);
-    var color = (0, _parseInt2.default)(gridPiece.color);
-
-    if (piece === _Enums.ChessPiece.KING || piece === _Enums.ChessPiece.ROOK) {//
-    } // update position in ChesschessBoard Array
-
-
-    chessBoard.board[(0, _Utility.positionToArrayIndex)(startPosition)] = {
-      piece: _Enums.ChessPiece.EMPTY,
-      color: _Enums.Color.EMPTY
-    };
-    chessBoard.board[(0, _Utility.positionToArrayIndex)(destPosition)] = {
-      piece: piece,
-      color: color
-    }; // play sound
-
-    _Sounds.moveSound.play();
-
-    ui.draggable.draggable('option', 'revert', "invalid");
-  }
-};
-
-exports.handleDropEvent = handleDropEvent;
-},{"@babel/runtime-corejs2/core-js/parse-int":"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js","./Utility":"../src/core/Utility.js","./Enums":"../src/core/Enums.js","./Sounds":"../src/core/Sounds.js"}],"../src/core/session.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _Enums = require("./Enums");
-
-var Session = {
-  myColor: _Enums.Color.WHITE,
-  opponentColor: _Enums.Color.BLACK
-};
-var _default = Session;
-exports.default = _default;
-},{"./Enums":"../src/core/Enums.js"}],"../src/static/images/pawn_black.svg":[function(require,module,exports) {
-module.exports = "/pawn_black.dc2ccb3c.svg";
-},{}],"../src/static/images/pawn_white.svg":[function(require,module,exports) {
-module.exports = "/pawn_white.4a259157.svg";
-},{}],"../src/static/images/king_black.svg":[function(require,module,exports) {
-module.exports = "/king_black.8c980b8d.svg";
-},{}],"../src/static/images/king_white.svg":[function(require,module,exports) {
-module.exports = "/king_white.b95757a4.svg";
-},{}],"../src/static/images/queen_black.svg":[function(require,module,exports) {
-module.exports = "/queen_black.c6d3ff88.svg";
-},{}],"../src/static/images/queen_white.svg":[function(require,module,exports) {
-module.exports = "/queen_white.fd9a7ff5.svg";
-},{}],"../src/static/images/rook_black.svg":[function(require,module,exports) {
-module.exports = "/rook_black.4c664f80.svg";
-},{}],"../src/static/images/rook_white.svg":[function(require,module,exports) {
-module.exports = "/rook_white.d389c1f7.svg";
-},{}],"../src/static/images/knight_black.svg":[function(require,module,exports) {
-module.exports = "/knight_black.61eac6ee.svg";
-},{}],"../src/static/images/knight_white.svg":[function(require,module,exports) {
-module.exports = "/knight_white.fc99a87d.svg";
-},{}],"../src/static/images/bishop_black.svg":[function(require,module,exports) {
-module.exports = "/bishop_black.3c937dba.svg";
-},{}],"../src/static/images/bishop_white.svg":[function(require,module,exports) {
-module.exports = "/bishop_white.89bc2216.svg";
-},{}],"../src/injectors/Board.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setupChessBoard = setupChessBoard;
-
-var _Utility = require("../core/Utility");
-
-var _Enums = require("../core/Enums");
-
-var _settings = _interopRequireDefault(require("../core/settings"));
-
-var _DragNDrop = require("../core/DragNDrop");
-
-var _session = _interopRequireDefault(require("../core/session"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import '../static/images/pawn'
-var images = {
-  pawn: {
-    black: require('../static/images/pawn_black.svg'),
-    white: require('../static/images/pawn_white.svg')
-  },
-  king: {
-    black: require('../static/images/king_black.svg'),
-    white: require('../static/images/king_white.svg')
-  },
-  queen: {
-    black: require('../static/images/queen_black.svg'),
-    white: require('../static/images/queen_white.svg')
-  },
-  rook: {
-    black: require('../static/images/rook_black.svg'),
-    white: require('../static/images/rook_white.svg')
-  },
-  knight: {
-    black: require('../static/images/knight_black.svg'),
-    white: require('../static/images/knight_white.svg')
-  },
-  bishop: {
-    black: require('../static/images/bishop_black.svg'),
-    white: require('../static/images/bishop_white.svg')
-  }
-};
-var baseImageURL = '../src/static/images/';
-
-function setupChessBoard(id) {
-  $('board').droppable = false;
-  var boardUI = document.querySelector("#".concat(id));
-
-  for (var i = 8; i >= 1; i--) {
-    var black = i % 2 === 1;
-
-    for (var j = _Utility.charCodeA; j <= _Utility.charCodeH; j++) {
-      boardUI.innerHTML += "<div class=\"chess-cell ".concat(black ? 'black' : 'white', "\" id=\"").concat(String.fromCharCode(j)).concat(i, "\"></div>");
-      black = !black;
-    }
-  }
-
-  function addImgNodeInGrid(piece, color, grid) {
-    var img = document.createElement("img");
-    img.src = images[piece][color];
-    img.classList.add("svg-piece");
-    img.classList.add("".concat(color, "-piece"));
-    img.dataset.position = grid;
-    img.dataset.piece = _Enums.ChessPiece[piece.toUpperCase()];
-    document.getElementById(grid).appendChild(img);
-  }
-
-  for (var _j = _Utility.charCodeA; _j <= _Utility.charCodeH; _j++) {
-    addImgNodeInGrid('pawn', 'black', "".concat(String.fromCharCode(_j), "7"));
-    addImgNodeInGrid('pawn', 'white', "".concat(String.fromCharCode(_j), "2"));
-  }
-
-  2; // queen
-
-  addImgNodeInGrid('queen', 'white', 'd1');
-  addImgNodeInGrid('queen', 'black', 'd8'); // king
-
-  addImgNodeInGrid('king', 'white', 'e1');
-  addImgNodeInGrid('king', 'black', 'e8'); // bishops
-
-  addImgNodeInGrid('bishop', 'black', 'c8');
-  addImgNodeInGrid('bishop', 'black', 'f8');
-  addImgNodeInGrid('bishop', 'white', 'c1');
-  addImgNodeInGrid('bishop', 'white', 'f1'); // knights 
-
-  addImgNodeInGrid('knight', 'black', 'b8');
-  addImgNodeInGrid('knight', 'black', 'g8');
-  addImgNodeInGrid('knight', 'white', 'b1');
-  addImgNodeInGrid('knight', 'white', 'g1'); // rooks
-
-  addImgNodeInGrid('rook', 'black', 'a8');
-  addImgNodeInGrid('rook', 'black', 'h8');
-  addImgNodeInGrid('rook', 'white', 'a1');
-  addImgNodeInGrid('rook', 'white', 'h1'); //   Rooks
-
-  chessBoard.setByIndex(1, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(8, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(57, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.BLACK
-  });
-  chessBoard.setByIndex(64, {
-    piece: _Enums.ChessPiece.ROOK,
-    color: _Enums.Color.BLACK
-  }); //   Knights
-
-  chessBoard.setByIndex(2, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(7, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(58, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.BLACK
-  });
-  chessBoard.setByIndex(63, {
-    piece: _Enums.ChessPiece.KNIGHT,
-    color: _Enums.Color.BLACK
-  }); //   Bishops
-
-  chessBoard.setByIndex(3, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(6, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(59, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.BLACK
-  });
-  chessBoard.setByIndex(62, {
-    piece: _Enums.ChessPiece.BISHOP,
-    color: _Enums.Color.BLACK
-  }); //   Queens
-
-  chessBoard.setByIndex(4, {
-    piece: _Enums.ChessPiece.QUEEN,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(60, {
-    piece: _Enums.ChessPiece.QUEEN,
-    color: _Enums.Color.BLACK
-  }); //   Kings
-
-  chessBoard.setByIndex(5, {
-    piece: _Enums.ChessPiece.KING,
-    color: _Enums.Color.WHITE
-  });
-  chessBoard.setByIndex(61, {
-    piece: _Enums.ChessPiece.KING,
-    color: _Enums.Color.BLACK
-  }); //   Pawns
-
-  for (var _i = 0; _i < 8; _i++) {
-    chessBoard.setByIndex(9 + _i, {
-      piece: _Enums.ChessPiece.PAWN,
-      color: _Enums.Color.WHITE
-    });
-    chessBoard.setByIndex(49 + _i, {
-      piece: _Enums.ChessPiece.PAWN,
-      color: _Enums.Color.BLACK
-    });
-  }
-
-  var dragConfig = {
-    start: _DragNDrop.handleDragStart,
-    containment: "#chess-board",
-    scroll: false,
-    cursor: 'move',
-    revert: "invalid",
-    revertDuration: 200
-  };
-  var dropConfig = {
-    drop: _DragNDrop.handleDropEvent,
-    accept: '.svg-piece',
-    hoverClass: 'hoverEffect'
-  }; // setting up the pieces
-
-  if (_settings.default.chessBoardType === _Enums.ChessBoardType.PlayGround) {
-    // make pieces draggable
-    $(".svg-piece").draggable(dragConfig);
-    $(".chess-cell").droppable(dropConfig);
-    $(".svg-piece").click(function (event) {
-      console.log(event);
-      var _event$target$dataset = event.target.dataset,
-          position = _event$target$dataset.position,
-          piece = _event$target$dataset.piece;
-      var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(position)];
-      chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-    }); // $(".chess-cell").click((event) => {
-    //     let id = event.target.id;   
-    //     // if (chessBoard.validMoves.includes(id)) {
-    //     //     console.log("Change position");
-    //     //     pieceSelected = false
-    //     // }
-    //     // else {
-    //     //     console.log("Don't changes position.");
-    //     //     pieceSelected = false;
-    //     // }
-    // })
-  } else if (_settings.default.chessBoardType === _Enums.ChessBoardType.Match) {
-    // make pieces draggable
-    $(".".concat(_session.default.myColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).draggable(dragConfig);
-    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).attr("draggable", false);
-    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).css('cursor', 'auto');
-    $(".chess-cell").droppable(dropConfig);
-    $(".svg-piece").click(function (event) {
-      console.log(event);
-      var _event$target$dataset2 = event.target.dataset,
-          position = _event$target$dataset2.position,
-          piece = _event$target$dataset2.piece;
-      var gridPiece = chessBoard.board[(0, _Utility.positionToArrayIndex)(position)];
-      chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-    });
-  } else if (_settings.default.chessBoardType === _Enums.ChessBoardType.Disabled) {
-    $(".svg-piece").attr("draggable", false);
-    $(".svg-piece").css('cursor', 'auto');
-  }
-}
-},{"../core/Utility":"../src/core/Utility.js","../core/Enums":"../src/core/Enums.js","../core/settings":"../src/core/settings.js","../core/DragNDrop":"../src/core/DragNDrop.js","../core/session":"../src/core/session.js","../static/images/pawn_black.svg":"../src/static/images/pawn_black.svg","../static/images/pawn_white.svg":"../src/static/images/pawn_white.svg","../static/images/king_black.svg":"../src/static/images/king_black.svg","../static/images/king_white.svg":"../src/static/images/king_white.svg","../static/images/queen_black.svg":"../src/static/images/queen_black.svg","../static/images/queen_white.svg":"../src/static/images/queen_white.svg","../static/images/rook_black.svg":"../src/static/images/rook_black.svg","../static/images/rook_white.svg":"../src/static/images/rook_white.svg","../static/images/knight_black.svg":"../src/static/images/knight_black.svg","../static/images/knight_white.svg":"../src/static/images/knight_white.svg","../static/images/bishop_black.svg":"../src/static/images/bishop_black.svg","../static/images/bishop_white.svg":"../src/static/images/bishop_white.svg"}],"../src/App.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
-
-var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
-
-var _Header = _interopRequireDefault(require("./injectors/Header"));
-
-var _Footer = _interopRequireDefault(require("./injectors/Footer"));
-
-var _Board = require("./injectors/Board");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function App(_x) {
-  return _App.apply(this, arguments);
-}
-
-function _App() {
-  _App = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(id) {
-    var boardId, template;
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            (0, _Header.default)(id);
-            boardId = 'chess-board';
-            template = "<div id=\"".concat(boardId, "\"></div>");
-            $("#".concat(id)).append(template);
-            (0, _Board.setupChessBoard)(boardId);
-            (0, _Footer.default)(id);
-
-          case 6:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _App.apply(this, arguments);
-}
-
-var _default = App;
-exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","./injectors/Header":"../src/injectors/Header.js","./injectors/Footer":"../src/injectors/Footer.js","./injectors/Board":"../src/injectors/Board.js"}],"../src/core/chessBoard.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _Enums = require("./Enums");
-
 var _Utility = require("./Utility");
 
 var chessBoard = {
+  canMove: true,
+  myColor: _Enums.Color.WHITE,
   // current position of pieces
   board: new Array(65).fill({
     piece: _Enums.ChessPiece.EMPTY,
     color: _Enums.Color.EMPTY
   }),
+  // can castle for white
+  canCastleWhite: {
+    left: true,
+    right: true
+  },
+  // can castle for black
+  canCastleBlack: {
+    left: true,
+    right: true
+  },
   // valid moves for current situation
   validMoves: new Array(),
   // pieces captured
   removedPieces: new Array(),
+  // moves have made
+  movesMade: new Array(),
+  // piece for which we have valid moves.
+  validMovesFor: {},
   // get pieces by position for eg. 'a4'
   getPiece: function getPiece(position) {
     return this.board[(0, _Utility.positionToArrayIndex)(position)];
@@ -4749,7 +4366,98 @@ var chessBoard = {
   setByIndex: function setByIndex(index, piece) {
     this.board[index] = piece;
   },
+  // getMoveNotation: function (piece, position) {
+  //     switch (piece) {
+  //         case ChessPiece.KING   : return `K${position}`;
+  //         case ChessPiece.QUEEN  : return `Q${position}`;
+  //         case ChessPiece.ROOK   : return `R${position}`;
+  //         case ChessPiece.BISHOP : return `B${position}`;
+  //         case ChessPiece.KNIGHT : return `K${position}`;
+  //         case ChessPiece.PAWN   : return `P${position}`;
+  //         default: return '';
+  //     }
+  // },
   // evaluate array index of board from position string
+  handleMoveMade: function handleMoveMade(move) {
+    chessBoard.movesMade.push(move); // update position in ChesschessBoard Array
+
+    this.board[this.positionToArrayIndex(move.from)] = {
+      piece: _Enums.ChessPiece.EMPTY,
+      color: _Enums.Color.EMPTY
+    };
+    this.board[this.positionToArrayIndex(move.to)] = {
+      piece: move.piece,
+      color: move.color
+    };
+
+    if (move.piece === _Enums.ChessPiece.ROOK) {
+      if (this.myColor === _Enums.Color.WHITE) {
+        if (move.from[0] === 'a') {
+          this.canCastleWhite.left = false;
+        } else if (move.from[0] === 'h') {
+          this.canCastleWhite.right = false;
+        }
+      } else {
+        if (move.from[0] === 'a') {
+          this.canCastleWhite.right = false;
+        } else if (move.from[0] === 'h') {
+          this.canCastleWhite.left = false;
+        }
+      }
+    } else if (move.piece === _Enums.ChessPiece.KING) {
+      if (this.myColor === _Enums.Color.WHITE) {
+        this.canCastleWhite.left = false;
+        this.canCastleBlack.right = false;
+      } else {
+        this.canCastleBlack.left = false;
+        this.canCastleBlack.right = false;
+      }
+
+      if (Math.abs(this.positionToArrayIndex(move.from) - this.positionToArrayIndex(move.to)) === 2) {
+        var startPosition, destPosition;
+
+        switch (move.to) {
+          case 'c1':
+            startPosition = 'a1';
+            destPosition = 'd1';
+            break;
+
+          case 'g1':
+            startPosition = 'h1';
+            destPosition = 'f1';
+            break;
+
+          case 'c8':
+            startPosition = 'a8';
+            destPosition = 'd8';
+            break;
+
+          case 'g8':
+            startPosition = 'h8';
+            destPosition = 'f8';
+            break;
+        }
+
+        this.makeMove(startPosition, destPosition);
+      }
+    }
+  },
+  makeMove: function makeMove(from, to) {
+    this.eraseValidMoves();
+    var imgPiece = $("#".concat(from)).find('img')[0];
+    imgPiece.dataset.position = to;
+    $("#".concat(to)).append(imgPiece);
+    var gridPiece = this.board[(0, _Utility.positionToArrayIndex)(from)];
+    var move = {
+      piece: gridPiece.piece,
+      color: gridPiece.color,
+      from: from,
+      to: to
+    };
+    this.handleMoveMade(move);
+
+    _Sounds.moveSound.play();
+  },
   positionToArrayIndex: function positionToArrayIndex(position) {
     var letter = position.charCodeAt(0);
 
@@ -4800,6 +4508,11 @@ var chessBoard = {
     };
 
     this.validMoves = [];
+    this.validMovesFor = {
+      currentPosition: currentPosition,
+      piece: piece,
+      color: color
+    };
     var letter = currentPosition.charCodeAt(0);
 
     var num = currentPosition.charCodeAt(1) - _Utility.charCode0;
@@ -4931,6 +4644,17 @@ var chessBoard = {
             addEntry(a, b);
           }
         }
+      } // Castling conditions
+
+
+      var canCastle = this.myColor === _Enums.Color.WHITE ? this.canCastleWhite : this.canCastleBlack;
+
+      if (canCastle.left) {
+        this.myColor === _Enums.Color.WHITE ? addEntry(letter - 2, num) : addEntry(letter + 2, num);
+      }
+
+      if (canCastle.right) {
+        this.myColor === _Enums.Color.BLACK ? addEntry(letter - 2, num) : addEntry(letter + 2, num);
       }
     } else if (piece === _Enums.ChessPiece.PAWN) {
       if (_Enums.Color.BLACK === color) {
@@ -4992,7 +4716,461 @@ var chessBoard = {
 };
 var _default = chessBoard;
 exports.default = _default;
-},{"./Enums":"../src/core/Enums.js","./Utility":"../src/core/Utility.js"}],"../node_modules/jquery/dist/jquery.js":[function(require,module,exports) {
+},{"./Enums":"../src/core/Enums.js","./Sounds":"../src/core/Sounds.js","./Utility":"../src/core/Utility.js"}],"../src/core/events.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.handleClickEventForChessCell = handleClickEventForChessCell;
+exports.handleClickEventForSVGPiece = handleClickEventForSVGPiece;
+exports.handleRightClickEvent = handleRightClickEvent;
+exports.handleDropEvent = exports.handleDragStart = void 0;
+
+var _parseInt2 = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/parse-int"));
+
+var _Utility = require("./Utility");
+
+var _Enums = require("./Enums");
+
+var _Sounds = require("./Sounds");
+
+var _chessBoard = _interopRequireDefault(require("./chessBoard"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var handleDragStart = function handleDragStart(event) {
+  var _event$target$dataset = event.target.dataset,
+      position = _event$target$dataset.position,
+      piece = _event$target$dataset.piece;
+  event.target.style.zIndex = '9999';
+
+  _chessBoard.default.eraseValidMoves();
+
+  var gridPiece = _chessBoard.default.board[(0, _Utility.positionToArrayIndex)(position)];
+
+  _chessBoard.default.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+};
+
+exports.handleDragStart = handleDragStart;
+
+var handleDropEvent = function handleDropEvent(event, ui) {
+  var pieceUI = ui.draggable[0];
+  var startPosition = pieceUI.dataset.position;
+  var destPosition = event.target.id;
+  console.log("start postion: ".concat(startPosition, ", destination postion: ").concat(destPosition));
+
+  if (startPosition === destPosition) {
+    ui.draggable.draggable('option', 'revert', "valid");
+    pieceUI.style.zIndex = '0';
+    return;
+  }
+
+  if (!_chessBoard.default.validMoves.includes(destPosition)) {
+    ui.draggable.draggable('option', 'revert', "valid");
+    pieceUI.style.zIndex = '0';
+    return;
+  } else {
+    pieceUI.style.zIndex = '0';
+
+    _chessBoard.default.eraseValidMoves();
+
+    console.log(ui.draggable[0]);
+
+    var gridPiece = _chessBoard.default.board[(0, _Utility.positionToArrayIndex)(startPosition)];
+
+    var destPosPiece = _chessBoard.default.board[(0, _Utility.positionToArrayIndex)(destPosition)];
+
+    if (destPosPiece.piece !== _Enums.ChessPiece.EMPTY) {
+      _chessBoard.default.removedPieces.push(destPosPiece);
+
+      $("#".concat(destPosition)).empty();
+    }
+
+    pieceUI.dataset.position = destPosition;
+    pieceUI.style.top = '0px';
+    pieceUI.style.left = '0px';
+    event.target.append(pieceUI);
+    var piece = (0, _parseInt2.default)(gridPiece.piece);
+    var color = (0, _parseInt2.default)(gridPiece.color); // handling move made
+
+    var move = {
+      piece: gridPiece.piece,
+      color: gridPiece.color,
+      from: startPosition,
+      to: destPosition
+    };
+
+    _chessBoard.default.handleMoveMade(move); // play sound
+
+
+    _Sounds.moveSound.play();
+
+    ui.draggable.draggable('option', 'revert', "invalid");
+  }
+};
+
+exports.handleDropEvent = handleDropEvent;
+
+function handleClickEventForChessCell(event) {
+  var className = event.target.classList.value;
+  if (this !== event.target && className !== "validMoves") return;
+  var startPosition = _chessBoard.default.validMovesFor.currentPosition;
+  var destPosition = this.id;
+  if (startPosition === destPosition || destPosition === '') return;
+
+  if (_chessBoard.default.validMoves.includes(destPosition)) {
+    _chessBoard.default.makeMove(startPosition, destPosition);
+  } else {
+    _chessBoard.default.makeMove(startPosition, destPosition);
+  }
+}
+
+function handleClickEventForSVGPiece(event) {
+  if (this !== event.target) return;
+  console.log("SVG Piece clicked");
+  console.log(event);
+  var _event$target$dataset2 = event.target.dataset,
+      position = _event$target$dataset2.position,
+      piece = _event$target$dataset2.piece;
+
+  var gridPiece = _chessBoard.default.board[(0, _Utility.positionToArrayIndex)(position)];
+
+  _chessBoard.default.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+}
+
+function handleRightClickEvent(event) {
+  $(this).toggleClass("rightClickEffect");
+  return false;
+}
+},{"@babel/runtime-corejs2/core-js/parse-int":"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js","./Utility":"../src/core/Utility.js","./Enums":"../src/core/Enums.js","./Sounds":"../src/core/Sounds.js","./chessBoard":"../src/core/chessBoard.js"}],"../src/core/session.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Enums = require("./Enums");
+
+var Session = {
+  myColor: _Enums.Color.WHITE,
+  opponentColor: _Enums.Color.BLACK
+};
+var _default = Session;
+exports.default = _default;
+},{"./Enums":"../src/core/Enums.js"}],"../src/static/images/pawn_black.svg":[function(require,module,exports) {
+module.exports = "/pawn_black.dc2ccb3c.svg";
+},{}],"../src/static/images/pawn_white.svg":[function(require,module,exports) {
+module.exports = "/pawn_white.4a259157.svg";
+},{}],"../src/static/images/king_black.svg":[function(require,module,exports) {
+module.exports = "/king_black.8c980b8d.svg";
+},{}],"../src/static/images/king_white.svg":[function(require,module,exports) {
+module.exports = "/king_white.b95757a4.svg";
+},{}],"../src/static/images/queen_black.svg":[function(require,module,exports) {
+module.exports = "/queen_black.c6d3ff88.svg";
+},{}],"../src/static/images/queen_white.svg":[function(require,module,exports) {
+module.exports = "/queen_white.fd9a7ff5.svg";
+},{}],"../src/static/images/rook_black.svg":[function(require,module,exports) {
+module.exports = "/rook_black.4c664f80.svg";
+},{}],"../src/static/images/rook_white.svg":[function(require,module,exports) {
+module.exports = "/rook_white.d389c1f7.svg";
+},{}],"../src/static/images/knight_black.svg":[function(require,module,exports) {
+module.exports = "/knight_black.61eac6ee.svg";
+},{}],"../src/static/images/knight_white.svg":[function(require,module,exports) {
+module.exports = "/knight_white.fc99a87d.svg";
+},{}],"../src/static/images/bishop_black.svg":[function(require,module,exports) {
+module.exports = "/bishop_black.3c937dba.svg";
+},{}],"../src/static/images/bishop_white.svg":[function(require,module,exports) {
+module.exports = "/bishop_white.89bc2216.svg";
+},{}],"../src/injectors/Board.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setupChessBoard = setupChessBoard;
+
+var _Utility = require("../core/Utility");
+
+var _Enums = require("../core/Enums");
+
+var _settings = _interopRequireDefault(require("../core/settings"));
+
+var _events = require("../core/events");
+
+var _session = _interopRequireDefault(require("../core/session"));
+
+var _chessBoard = _interopRequireDefault(require("../core/chessBoard"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import '../static/images/pawn'
+var images = {
+  pawn: {
+    black: require('../static/images/pawn_black.svg'),
+    white: require('../static/images/pawn_white.svg')
+  },
+  king: {
+    black: require('../static/images/king_black.svg'),
+    white: require('../static/images/king_white.svg')
+  },
+  queen: {
+    black: require('../static/images/queen_black.svg'),
+    white: require('../static/images/queen_white.svg')
+  },
+  rook: {
+    black: require('../static/images/rook_black.svg'),
+    white: require('../static/images/rook_white.svg')
+  },
+  knight: {
+    black: require('../static/images/knight_black.svg'),
+    white: require('../static/images/knight_white.svg')
+  },
+  bishop: {
+    black: require('../static/images/bishop_black.svg'),
+    white: require('../static/images/bishop_white.svg')
+  }
+};
+var baseImageURL = '../src/static/images/';
+
+function setupChessBoard(id) {
+  $('board').droppable = false;
+  var boardUI = document.querySelector("#".concat(id));
+
+  for (var i = 8; i >= 1; i--) {
+    var black = i % 2 === 1;
+
+    for (var j = _Utility.charCodeA; j <= _Utility.charCodeH; j++) {
+      boardUI.innerHTML += "<div class=\"chess-cell ".concat(black ? 'black' : 'white', "\" id=\"").concat(String.fromCharCode(j)).concat(i, "\"></div>");
+      black = !black;
+    }
+  }
+
+  function addImgNodeInGrid(piece, color, grid) {
+    var img = document.createElement("img");
+    img.src = images[piece][color];
+    img.classList.add("svg-piece");
+    img.classList.add("".concat(color, "-piece"));
+    img.dataset.position = grid;
+    img.dataset.piece = _Enums.ChessPiece[piece.toUpperCase()];
+    document.getElementById(grid).appendChild(img);
+  }
+
+  for (var _j = _Utility.charCodeA; _j <= _Utility.charCodeH; _j++) {
+    addImgNodeInGrid('pawn', 'black', "".concat(String.fromCharCode(_j), "7"));
+    addImgNodeInGrid('pawn', 'white', "".concat(String.fromCharCode(_j), "2"));
+  } // queen
+
+
+  addImgNodeInGrid('queen', 'white', 'd1');
+  addImgNodeInGrid('queen', 'black', 'd8'); // king
+
+  addImgNodeInGrid('king', 'white', 'e1');
+  addImgNodeInGrid('king', 'black', 'e8'); // bishops
+
+  addImgNodeInGrid('bishop', 'black', 'c8');
+  addImgNodeInGrid('bishop', 'black', 'f8');
+  addImgNodeInGrid('bishop', 'white', 'c1');
+  addImgNodeInGrid('bishop', 'white', 'f1'); // knights 
+
+  addImgNodeInGrid('knight', 'black', 'b8');
+  addImgNodeInGrid('knight', 'black', 'g8');
+  addImgNodeInGrid('knight', 'white', 'b1');
+  addImgNodeInGrid('knight', 'white', 'g1'); // rooks
+
+  addImgNodeInGrid('rook', 'black', 'a8');
+  addImgNodeInGrid('rook', 'black', 'h8');
+  addImgNodeInGrid('rook', 'white', 'a1');
+  addImgNodeInGrid('rook', 'white', 'h1'); //   Rooks
+
+  _chessBoard.default.setByIndex(1, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(8, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(57, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.BLACK
+  });
+
+  _chessBoard.default.setByIndex(64, {
+    piece: _Enums.ChessPiece.ROOK,
+    color: _Enums.Color.BLACK
+  }); //   Knights
+
+
+  _chessBoard.default.setByIndex(2, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(7, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(58, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.BLACK
+  });
+
+  _chessBoard.default.setByIndex(63, {
+    piece: _Enums.ChessPiece.KNIGHT,
+    color: _Enums.Color.BLACK
+  }); //   Bishops
+
+
+  _chessBoard.default.setByIndex(3, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(6, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(59, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.BLACK
+  });
+
+  _chessBoard.default.setByIndex(62, {
+    piece: _Enums.ChessPiece.BISHOP,
+    color: _Enums.Color.BLACK
+  }); //   Queens
+
+
+  _chessBoard.default.setByIndex(4, {
+    piece: _Enums.ChessPiece.QUEEN,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(60, {
+    piece: _Enums.ChessPiece.QUEEN,
+    color: _Enums.Color.BLACK
+  }); //   Kings
+
+
+  _chessBoard.default.setByIndex(5, {
+    piece: _Enums.ChessPiece.KING,
+    color: _Enums.Color.WHITE
+  });
+
+  _chessBoard.default.setByIndex(61, {
+    piece: _Enums.ChessPiece.KING,
+    color: _Enums.Color.BLACK
+  }); //   Pawns
+
+
+  for (var _i = 0; _i < 8; _i++) {
+    _chessBoard.default.setByIndex(9 + _i, {
+      piece: _Enums.ChessPiece.PAWN,
+      color: _Enums.Color.WHITE
+    });
+
+    _chessBoard.default.setByIndex(49 + _i, {
+      piece: _Enums.ChessPiece.PAWN,
+      color: _Enums.Color.BLACK
+    });
+  }
+
+  var dragConfig = {
+    start: _events.handleDragStart,
+    containment: "#chess-board",
+    scroll: false,
+    cursor: 'move',
+    revert: "invalid",
+    revertDuration: 200,
+    cursorAt: {
+      left: 40,
+      right: 40,
+      top: 40,
+      bottom: 40
+    }
+  };
+  var dropConfig = {
+    drop: _events.handleDropEvent,
+    accept: '.svg-piece',
+    hoverClass: 'hoverEffect'
+  }; // setting up the pieces
+
+  if (_settings.default.chessBoardType === _Enums.ChessBoardType.PlayGround) {
+    // make pieces draggable
+    $(".svg-piece").draggable(dragConfig);
+    $(".chess-cell").droppable(dropConfig);
+    $(".svg-piece").click(_events.handleClickEventForSVGPiece);
+    $(".chess-cell").click(_events.handleClickEventForChessCell);
+    $(".chess-cell").contextmenu(_events.handleRightClickEvent);
+  } else if (_settings.default.chessBoardType === _Enums.ChessBoardType.Match) {
+    // make pieces draggable
+    $(".".concat(_session.default.myColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).draggable(dragConfig);
+    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).attr("draggable", false);
+    $(".".concat(_session.default.opponentColor === _Enums.Color.WHITE ? 'white' : 'black', "-piece")).css('cursor', 'auto');
+    $(".chess-cell").droppable(dropConfig);
+    $(".svg-piece").click(_events.handleClickEventForSVGPiece);
+  } else if (_settings.default.chessBoardType === _Enums.ChessBoardType.Disabled) {
+    $(".svg-piece").attr("draggable", false);
+    $(".svg-piece").css('cursor', 'auto');
+  }
+}
+},{"../core/Utility":"../src/core/Utility.js","../core/Enums":"../src/core/Enums.js","../core/settings":"../src/core/settings.js","../core/events":"../src/core/events.js","../core/session":"../src/core/session.js","../core/chessBoard":"../src/core/chessBoard.js","../static/images/pawn_black.svg":"../src/static/images/pawn_black.svg","../static/images/pawn_white.svg":"../src/static/images/pawn_white.svg","../static/images/king_black.svg":"../src/static/images/king_black.svg","../static/images/king_white.svg":"../src/static/images/king_white.svg","../static/images/queen_black.svg":"../src/static/images/queen_black.svg","../static/images/queen_white.svg":"../src/static/images/queen_white.svg","../static/images/rook_black.svg":"../src/static/images/rook_black.svg","../static/images/rook_white.svg":"../src/static/images/rook_white.svg","../static/images/knight_black.svg":"../src/static/images/knight_black.svg","../static/images/knight_white.svg":"../src/static/images/knight_white.svg","../static/images/bishop_black.svg":"../src/static/images/bishop_black.svg","../static/images/bishop_white.svg":"../src/static/images/bishop_white.svg"}],"../src/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
+
+var _Header = _interopRequireDefault(require("./injectors/Header"));
+
+var _Footer = _interopRequireDefault(require("./injectors/Footer"));
+
+var _Board = require("./injectors/Board");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function App(_x) {
+  return _App.apply(this, arguments);
+}
+
+function _App() {
+  _App = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(id) {
+    var boardId, template;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            (0, _Header.default)(id);
+            boardId = 'chess-board';
+            template = "<div id=\"".concat(boardId, "\"></div>");
+            $("#".concat(id)).append(template);
+            (0, _Board.setupChessBoard)(boardId);
+            (0, _Footer.default)(id);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _App.apply(this, arguments);
+}
+
+var _default = App;
+exports.default = _default;
+},{"@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","./injectors/Header":"../src/injectors/Header.js","./injectors/Footer":"../src/injectors/Footer.js","./injectors/Board":"../src/injectors/Board.js"}],"../node_modules/jquery/dist/jquery.js":[function(require,module,exports) {
 var global = arguments[3];
 var process = require("process");
 var define;
@@ -34662,7 +34840,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58321" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63341" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

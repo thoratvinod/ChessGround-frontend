@@ -1,14 +1,26 @@
 import { ChessPiece, Color } from './Enums';
+import { moveSound } from './Sounds';
 import { charCodeA, charCodeH, charCode0, positionToArrayIndex } from './Utility';
 
 const chessBoard = {
 
+    canMove: true,
+
+    myColor: Color.WHITE,
     // current position of pieces
     board: new Array(65).fill({ piece: ChessPiece.EMPTY, color: Color.EMPTY}),
+    // can castle for white
+    canCastleWhite: { left: true, right: true},
+    // can castle for black
+    canCastleBlack: { left: true, right: true},
     // valid moves for current situation
     validMoves: new Array(),
     // pieces captured
     removedPieces: new Array(),
+    // moves have made
+    movesMade: new Array(),
+    // piece for which we have valid moves.
+    validMovesFor: {},
     // get pieces by position for eg. 'a4'
     getPiece: function (position) {
         return this.board[positionToArrayIndex(position)];
@@ -21,7 +33,93 @@ const chessBoard = {
     setByIndex: function (index, piece) {
         this.board[index] = piece;
     },
+    // getMoveNotation: function (piece, position) {
+    //     switch (piece) {
+    //         case ChessPiece.KING   : return `K${position}`;
+    //         case ChessPiece.QUEEN  : return `Q${position}`;
+    //         case ChessPiece.ROOK   : return `R${position}`;
+    //         case ChessPiece.BISHOP : return `B${position}`;
+    //         case ChessPiece.KNIGHT : return `K${position}`;
+    //         case ChessPiece.PAWN   : return `P${position}`;
+    //         default: return '';
+    //     }
+    // },
     // evaluate array index of board from position string
+    handleMoveMade: function (move) {
+        chessBoard.movesMade.push(move);
+        // update position in ChesschessBoard Array
+        this.board[this.positionToArrayIndex(move.from)] = { piece: ChessPiece.EMPTY, color: Color.EMPTY };
+        this.board[this.positionToArrayIndex(move.to)] = { piece: move.piece, color: move.color};
+
+        if (move.piece === ChessPiece.ROOK) {
+
+            if (this.myColor === Color.WHITE) {
+                
+                if (move.from[0] === 'a') {
+                    this.canCastleWhite.left = false;
+                }
+                else if (move.from[0] === 'h') {
+                    this.canCastleWhite.right = false;
+                }
+            }
+            else {
+                if (move.from[0] === 'a') {
+                    this.canCastleWhite.right = false;
+                }
+                else if (move.from[0] === 'h') {
+                    this.canCastleWhite.left = false;
+                }
+            }
+
+        }
+        else if (move.piece === ChessPiece.KING) {
+
+            if (this.myColor === Color.WHITE) {
+                this.canCastleWhite.left = false; this.canCastleBlack.right = false;
+            }
+            else {
+                this.canCastleBlack.left = false; this.canCastleBlack.right = false;
+            }
+            if (Math.abs(this.positionToArrayIndex(move.from) - this.positionToArrayIndex(move.to)) === 2) {
+
+                let startPosition, destPosition;
+
+                switch (move.to) {
+                    case 'c1':
+                        startPosition = 'a1';
+                        destPosition = 'd1';
+                        break;
+                    case 'g1':
+                        startPosition = 'h1';
+                        destPosition = 'f1';
+                        break;
+                    case 'c8':
+                        startPosition = 'a8';
+                        destPosition = 'd8';
+                        break;
+                    case 'g8':
+                        startPosition = 'h8';
+                        destPosition = 'f8';
+                        break;
+                }
+                this.makeMove(startPosition, destPosition);
+            }
+            
+        }
+    },
+    makeMove: function (from, to) {
+
+        this.eraseValidMoves();
+        let imgPiece = $(`#${from}`).find('img')[0];
+        imgPiece.dataset.position = to;
+        $(`#${to}`).append(imgPiece);
+        let gridPiece = this.board[positionToArrayIndex(from)];
+        const move = { piece: gridPiece.piece, color: gridPiece.color, from: from, to: to };
+        this.handleMoveMade(move);
+        
+        moveSound.play();
+
+    },
     positionToArrayIndex: function (position) {
 
         const letter = position.charCodeAt(0);
@@ -31,7 +129,7 @@ const chessBoard = {
         return letterNum + (num-1) * 8;
     },
     // highlight valid moves on board UI
-    highlightPossibleMoves: function(currentPosition, piece, color) {
+    highlightPossibleMoves: function (currentPosition, piece, color) {
         
         const divBlock = `<div class="validMoves"></div>`;
         // let possibleMoves = getPossibleMoves(currentPosition, piece, color);
@@ -68,6 +166,7 @@ const chessBoard = {
         }
     
         this.validMoves = [];
+        this.validMovesFor = { currentPosition: currentPosition, piece: piece, color: color };
         const letter = currentPosition.charCodeAt(0);
         const num = currentPosition.charCodeAt(1) - charCode0; 
     
@@ -217,6 +316,18 @@ const chessBoard = {
                 }
                 
             }
+
+            // Castling conditions
+            let canCastle = this.myColor === Color.WHITE ? this.canCastleWhite : this.canCastleBlack;
+            if (canCastle.left) {
+                
+                this.myColor === Color.WHITE ? addEntry(letter - 2, num) : addEntry(letter + 2, num);
+            }
+            if (canCastle.right) {
+                
+                this.myColor === Color.BLACK ? addEntry(letter - 2, num) : addEntry(letter + 2, num);
+            }
+
         }
         else if (piece === ChessPiece.PAWN) {
     

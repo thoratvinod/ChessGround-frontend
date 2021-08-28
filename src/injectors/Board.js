@@ -2,9 +2,10 @@ import { charCode0, charCodeA, charCodeH, positionToArrayIndex } from '../core/U
 import { ChessPiece, Color, ChessBoardType } from '../core/Enums';
 import settings from '../core/settings';
 
-import { handleDragStart, handleDropEvent } from '../core/DragNDrop';
+import { handleClickEvent, handleClickEventForChessCell, handleClickEventForSVGPiece, handleDragStart, handleDropEvent, handleRightClickEvent } from '../core/events';
 
 import Session from '../core/session';
+import chessBoard from '../core/chessBoard';
 // import '../static/images/pawn'
 
 const images = {
@@ -69,7 +70,7 @@ export function setupChessBoard(id)
 
         addImgNodeInGrid('pawn', 'black', `${String.fromCharCode(j)}7`);
         addImgNodeInGrid('pawn', 'white', `${String.fromCharCode(j)}2`);
-    }2
+    }
 
     // queen
     addImgNodeInGrid('queen', 'white', 'd1');
@@ -136,7 +137,8 @@ export function setupChessBoard(id)
         scroll: false,
         cursor: 'move',
         revert: "invalid",
-        revertDuration: 200
+        revertDuration: 200,
+        cursorAt: { left: 40, right: 40, top: 40, bottom: 40 }
     };
 
     const dropConfig = {
@@ -154,27 +156,12 @@ export function setupChessBoard(id)
 
         $(".chess-cell").droppable(dropConfig);
 
-        $(".svg-piece").click((event) => {
-            console.log(event);
-            let { position, piece} = event.target.dataset
-            let gridPiece = chessBoard.board[positionToArrayIndex(position)];
-            chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-        });
+        $(".svg-piece").click(handleClickEventForSVGPiece);
 
-        
 
-        // $(".chess-cell").click((event) => {
-        //     let id = event.target.id;   
+        $(".chess-cell").click(handleClickEventForChessCell);
 
-        //     // if (chessBoard.validMoves.includes(id)) {
-        //     //     console.log("Change position");
-        //     //     pieceSelected = false
-        //     // }
-        //     // else {
-        //     //     console.log("Don't changes position.");
-        //     //     pieceSelected = false;
-        //     // }
-        // })
+        $(".chess-cell").contextmenu(handleRightClickEvent);
     }
     else if (settings.chessBoardType === ChessBoardType.Match) {
         
@@ -186,12 +173,7 @@ export function setupChessBoard(id)
 
         $(".chess-cell").droppable(dropConfig);
 
-        $(".svg-piece").click((event) => {
-            console.log(event);
-            let { position, piece } = event.target.dataset;
-            let gridPiece = chessBoard.board[positionToArrayIndex(position)];
-            chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
-        })
+        $(".svg-piece").click(handleClickEventForSVGPiece);
     }
     else if (settings.chessBoardType === ChessBoardType.Disabled) {
 

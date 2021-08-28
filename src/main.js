@@ -12,7 +12,6 @@ window.$ = window.jQuery = jquery;
 require("jquery-ui-dist/jquery-ui.js");
 
 const app = async () => {
-
   App("app");
 };
 

@@ -63,14 +63,6 @@ body {
   fill: white;
 }
 
-.notations {
-  /* position: relative;
-  z-index: 5555555;
-  left: 10vh;
-  top: 4.5vh;
-  color: black; */
-}
-
 .white .notation {
   color: #937171;
 }
@@ -100,6 +92,24 @@ i {
 
 .hoverEffect {
   filter: hue-rotate(45deg);
+}
+
+#modalTable {
+  width: 100%;
+}
+
+.modalSelectStyle {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
+.chess-cell {
+  cursor: pointer;
+}
+
+.rightClickEffect {
+  background-color: red;
 }
 
 /*# sourceMappingURL=/board.b1979aab.css.map */

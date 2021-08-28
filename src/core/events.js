@@ -1,6 +1,7 @@
 import { positionToArrayIndex } from './Utility';
 import { ChessPiece, Color } from './Enums';
 import { moveSound } from './Sounds';
+import chessBoard from './chessBoard';
 
 export const handleDragStart = (event) => {
 
@@ -47,16 +48,51 @@ export const handleDropEvent = (event, ui) => {
         event.target.append(pieceUI);
         const piece = parseInt(gridPiece.piece);
         const color = parseInt(gridPiece.color);
-        if (piece === ChessPiece.KING || piece === ChessPiece.ROOK) {
-
-            //
-        }
-        // update position in ChesschessBoard Array
-        chessBoard.board[positionToArrayIndex(startPosition)] = { piece: ChessPiece.EMPTY, color: Color.EMPTY };
-        chessBoard.board[positionToArrayIndex(destPosition)] = { piece: piece, color: color};
+        // handling move made
+        const move = { piece: gridPiece.piece, color: gridPiece.color, from: startPosition, to: destPosition }
+        chessBoard.handleMoveMade(move);
 
         // play sound
         moveSound.play();
         ui.draggable.draggable('option', 'revert', "invalid");
     }
+}
+
+export function handleClickEventForChessCell (event) {
+
+    let className = event.target.classList.value;
+  
+    if (this !== event.target && className !== "validMoves")
+        return;
+   
+    let startPosition = chessBoard.validMovesFor.currentPosition;
+    let destPosition = this.id;
+
+    if (startPosition === destPosition || destPosition === '')
+        return;
+
+    if (chessBoard.validMoves.includes(destPosition)) {
+        chessBoard.makeMove(startPosition, destPosition);
+    }
+    else {
+        chessBoard.makeMove(startPosition, destPosition);
+    }
+}
+
+export function handleClickEventForSVGPiece (event) {
+
+    if (this !== event.target)
+        return;
+    console.log("SVG Piece clicked");
+
+    console.log(event);
+    let { position, piece } = event.target.dataset
+    let gridPiece = chessBoard.board[positionToArrayIndex(position)];
+    chessBoard.highlightPossibleMoves(position, gridPiece.piece, gridPiece.color);
+}
+
+export function handleRightClickEvent(event) {
+
+    $(this).toggleClass("rightClickEffect");
+    return false;
 }
